@@ -1,19 +1,10 @@
 <template>
   <el-container class="" style="width:100%;text-align:center;">
-    <el-header style="width:85%;background:#000;margin-left:8%">
-      <el-row type="flex" justify="space-between" style="height:80px">
-        <el-col :span="4">
-          <div class="leftimg">
-              <img src="../../assets/img/icon.png" alt="">
-          </div>
-        </el-col>
-        <el-col :span="6"><div class="middlesearch">中间的搜索框</div></el-col>
-        <el-col :span="6"><div class="rightherf"></div>右边的连接</el-col>
-      </el-row>
-    </el-header>
+    <header-all></header-all>
     <el-main>
     </el-main>
-    <el-footer>
+    <el-footer style="margin:0;padding:0">
+      <footer-all></footer-all>
     </el-footer>
   </el-container>
 </template>
@@ -82,15 +73,5 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-el-container {
-  el-header {
-   height: 70px
-  }
-}
- .leftimg {
-    img {
-      height: 70px;
-    }
-  }
 
 </style>
