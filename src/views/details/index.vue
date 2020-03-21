@@ -1,453 +1,301 @@
 <template>
-  <el-container>
-    <el-header>
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="0">
-          <img src="../../assets/img/icon.png" alt />
-        </el-menu-item>
-        <el-menu-item @click="$router.push('/home')" index="1">首页</el-menu-item>
-        <el-submenu @click="$router.push('/search')" index="2">
-          <template slot="title">风格选电影</template>
-          <el-menu-item
-            v-for="(item,index) in stylechannel"
-            :key="index"
-            :index="`2-${item.id}`"
-             @click="$router.push('/search')"
-          >{{item.style}}</el-menu-item>
-        </el-submenu>
-        <el-submenu @click="$router.push('/search')" index="3">
-          <template slot="title">位置选电影</template>
-          <el-menu-item
-            v-for="(item,index) in addresschannel"
-            :key="index"
-            :index="`3-${item.id}`"
-             @click="$router.push('/search')"
-          >{{item.area}}</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="4" @click="$router.push('/account')">个人中心</el-menu-item>
-        <el-menu-item style="float: right;margin-right:40px" index="5">
-          <el-input size="small" v-model="$store.state.searchkeywords" placeholder="搜索电影"></el-input>
-          <el-button
-            @click="onsearch"
-            type="text"
-            style="background-color:#545c64;color:#fff;margin-left:20px"
-            icon="el-icon-search"
-          ></el-button>
-        </el-menu-item>
-      </el-menu>
-    </el-header>
-    <el-main>
-      <el-card>
-        <el-page-header slot="header" @back="$router.push('/search')" title="回搜索页" content="电影详情页"></el-page-header>
-        <div class="top">
-            <div class="topbanner"></div>
-            <div class="bottombanner"></div>
-            <div class="toptext">
-                <div class="left">
-                    <img :src="infodata.picture_url?infodata.picture_url:imgurl" alt="">
+  <el-container class="" style="width:100%;text-align:center;">
+    <header-all></header-all>
+     <el-container style="width:80%;margin-left:10%;" >
+      <el-aside width="300px" style="margin-top:0px">
+        <el-card class="comm-card" style="text-align:left;margin-top:20px;padding:0">
+          <div slot="header" class="clearfix" >
+              <span style="font-size:20px;font-weight:700"><i style="color:#545c64;font-size:20px" class="el-icon-s-comment"></i>最新评论</span>
+          </div>
+          <ul class="content_list comment_list">
+                    <li>
+                        <span>山</span>
+                        <b><em>山治</em> 9个月前(08-14)说:</b>
+                        <strong>挺会玩的</strong>
+                    </li>
+                    <li>
+                        <span>丽</span>
+                        <b><em>丽丽</em> 9个月前(08-14)说:9个月前(08-14)说:9个月前(08-14)说:</b>
+                        <strong>挺会玩的挺会玩的挺会玩的挺会玩的</strong>
+                    </li>
+                    <li>
+                        <span>R</span>
+                        <b><em>Rechael</em> 9个月前(08-14)说:</b>
+                        <strong>挺会玩的</strong>
+                    </li>
+                    <li>
+                        <span>J</span>
+                        <b><em>John</em> 9个月前(08-14)说:</b>
+                        <strong>挺会玩的</strong>
+                    </li>
+                    <li>
+                        <span>段</span>
+                        <b><em>段正淳</em> 9个月前(08-14)说:</b>
+                        <strong>挺会玩的</strong>
+                    </li>
+                    <li>
+                        <span>乔</span>
+                        <b><em>乔峰</em> 9个月前(08-14)说:</b>
+                        <strong>挺会玩的</strong>
+                    </li>
+                </ul>
+        </el-card>
+        <el-card class="hotwords-card" style="text-align:left;margin-top:20px">
+          <div slot="header" class="clearfix">
+              <span style="font-size:20px;font-weight:700"><i style="color:#545c64;font-size:20px" class="el-icon-loading"></i>热词星球</span>
+          </div>
+        <hot-words></hot-words>
+        </el-card>
+      </el-aside>
+      <el-main style="">
+        <el-card class="hot-card" style="text-align:left;">
+         <bread-crumb-front slot="header">
+            <template slot="title"> <a href="">上一级页面</a>  <span style="font-weight:700;color:#ccc">></span> 文章详情</template>
+          </bread-crumb-front>
+          <h3 class="article_title" id="title">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</h3>
+          <div class="article_info"><span id="author"> </span> 发布于 <span id="date"> 2019-05-08
+                    07:08:46</span>&nbsp;&nbsp;&nbsp;分类: <span id="typename">奇趣事</span> &nbsp;&nbsp;&nbsp;阅读:
+                ( <span id="readcount"></span> )&nbsp;&nbsp;&nbsp;评论: ( <span id="commentCount"></span> )
+          </div>
+          <div class="article_con" id="content">
+
+                <p>“上天入地”还不够？硅谷“钢铁侠”马斯克名下一家低调的公司最近又融了一大笔钱。</p>
+
+                <p>马斯克投资的一家小型且不为人熟知的脑机接口（brain-computer
+                    interface）公司Neuralink披露，该公司融到了3900万美元，虽然不及公司计划的融资额5100万美元，但也比上次的融资多了不少。</p>
+
+                <p>两年前该公司曾计划融资1亿美元，但只拿到了2700万美元的融资。</p>
+
+                <p>在Neuralink递交给美国证券交易委员会（SEC）的材料中，并没有披露融资是否来自传统的风险投资者或者来自该公司的员工。</p>
+
+                <p>2016年，Neuralink在美国加利福尼亚州以医学研究公司的名义成立，之后一直低调运行。</p>
+          </div>
+          <div class="article_links">
+              上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br>
+              下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a>
+          </div>
+          <form action="" class="comment_form">
+                <div class="form_group">
+                    <label>评论内容：</label>
+                    <textarea placeholder="请发表您的评论" id="usercontent" class="comment_input"></textarea>
                 </div>
-                <div class="right">
-                    <div class="right-title">
-                        <h1 style="font-size:38px;line-hight:40px">{{infodata.name}} <span style="font-size:34px;color:yellow;margin-left:30px">{{infodata.score}}</span> </h1>
-                        <h3 style="font-size:22px">{{infodata.hits}}<a href="#" style="text-decoration: none;color:#fff;margin-left:10px">次点击</a></h3>
-                    </div>
-                    <div class="right-main">
-                       <div>
-                          <span style="font-size:25px">导演：</span>
-                          <span>{{infodata.director}}</span>
-                      </div>
-                      <div style="margin-top:15px">
-                          <span style="font-size:22px;margin-top:30px">演员列表:  </span>
-                            <span  v-for="(item,index) in infodata.actors " :key="index">{{item}} | </span>
-                      </div>
-                      <el-rate
-                        v-model="showscore"
-                        disabled
-                        style="margin:15px 0 ;font-size:25px;display:inline-block">
-                      </el-rate><span style="font-size:25px;color: rgb(243, 213, 44);">{{infodata.score}} 分</span>
-                       <div class="plot">
-                          <p>{{infodata.introduce}}</p>
-                      </div>
+                <div class="form_group">
+                    <input type="button" name="" id="subbtn" value="评 论" class="comment_sub"></div>
+          </form>
+          <div class="comment_count">
+               <span id="comment_count">4</span> 条评论
+          </div>
+          <div class="comment_list_con" id="comment_list_down">
+                <div class="comment_detail_list">
+                    <div class="person_pic fl">乔</div>
+                    <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
+                    <div class="comment_text fl">
+                        遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
                     </div>
                 </div>
             </div>
-        </div>
-        <el-row :gutter="12" class="bottom">
-          <el-col :span="18">
-            <el-card shadow="always">
-             <p style="font-size:25px;margin-top:-5px;font-weight:700">精彩快播</p>
-              <el-divider></el-divider>
-             <video src="../../assets/video/test.mp4" controls></video>
-             <el-divider></el-divider>
-             <h2 style="text-align:left;margin-left:40px">发表我的观点</h2>
-                <el-input class="texta" type="textarea" rows="5" v-model="mycomm"></el-input>
-                <el-button type="primary" style="margin-top:20px" @click="onSubmit">立即发表</el-button>
-            </el-card>
-          </el-col>
-          <el-col :span="6">
-            <el-card shadow="always" style="height:900px;overflow:scroll">
-            <p style="font-size:25px;margin-top:-5px;font-weight:700">相关评论</p>
-             <el-divider></el-divider>
-             <el-timeline>
-              <el-timeline-item
-                v-for="(activity, index) in commData"
-                :key="index"
-                :timestamp="activity.create_time">
-                {{activity.content}}
-              </el-timeline-item>
-            </el-timeline>
-            </el-card>
-          </el-col>
-        </el-row>
-      </el-card>
-    </el-main>
-    <el-footer>
-      <footer class="footer" style="width: 100%;">
-        <div class="footer-inner">
-          <h3 class="homeico">
-            <img src="../../assets/img/icon.png" alt />
-          </h3>
-          <p class="footer-inner-links">
-            <a
-              href="https://www.1905.com/about/aboutus/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >关于我们</a>
-            <span>|</span>
-            <a
-              href="https://www.1905.com/sitemap.html?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >网站地图</a>
-            <span>|</span>
-            <a
-              href="https://www.1905.com/jobs/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >诚聘英才</a>
-            <span>|</span>
-            <a
-              href="https://www.1905.com/about/copyright/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >版权声明</a>
-            <span>|</span>
-            <a
-              href="https://www.1905.com/about/contactus/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >联系我们</a>
-            <span>|</span>
-            <a
-              href="https://www.1905.com/error_report/error_report-p-pid-125-cid-126-tid-128.html?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >帮助与反馈</a>
-            <span>|</span>
-            <a
-              href="https://www.1905.com/link/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >友情链接</a>
-            <span>|</span>
-            <a
-              href="https://www.1905.com/cctv6/advertise/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >CCTV6广告招商</a>
-            <!--<span>|</span>
-            <a href="javascript:void(0)">合作媒体</a>-->
-          </p>
-          <div class="footer-inner-bottom">
-            <a
-              href="https://www.1905.com/about/licence/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >网络视听许可证0107199号</a>
-            <a
-              href="https://www.1905.com/about/cbwjyxkz/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >出版物经营许可证</a>
-            <a
-              href="https://www.1905.com/about/dyfxjyxkz/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >电影发行经营许可证</a>
-            <a
-              href="https://www.1905.com/about/jyxyc/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >经营性演出许可证</a>
-            <a
-              href="https://www.1905.com/about/gbdsjm/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >广播电视节目制作经营许可证</a>
-            <br />
-            <a
-              href="https://www.1905.com/about/beian/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >企业法人营业执照</a>
-            <a
-              href="https://www.1905.com/about/zzdxyw/?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >增值电信业务经营许可证</a>
-            <a
-              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010202000300?fr=homepc_bottom"
-              target="_blank"
-              data-hrefexp="fr=homepc_bottom"
-            >京ICP备12022675号-3</a>
-            <a
-              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010202000300"
-              target="_blank"
-            >京公网安备 11010202000300号</a>
-          </div>
-        </div>
-      </footer>
+        </el-card>
+      </el-main>
+    </el-container>
+    <el-footer style="margin:0;padding:0">
+      <footer-all></footer-all>
     </el-footer>
   </el-container>
 </template>
-
 <script>
-import { getStyleChannels, getAddresChannels } from '@/api/channel.js'
-import { getfilminfo } from '@/api/film.js'
-import { getidComm, commitcomm } from '@/api/comment.js'
+
 export default {
+  name: 'home',
+  components: {},
   data () {
     return {
-      id: '',
-      imgurl: '../../assets/img/testbig.jpg',
-      videourl: '',
-      activeIndex: '1',
-      stylechannel: [],
-      addresschannel: [],
-      filters: [],
-      commData: [],
-      type: 'info',
-      sort: '',
-      showscore: 0,
-      infodata: {},
-      mycomm: ''
+      pageSize: 5,
+      totalcomm: 0,
+      currentPage: 1,
+      totalpage: 0
     }
   },
   methods: {
-    onsearch () {
-      console.log('触发了搜索事件')
-    },
-    handleSelect (key, keyPath) {
-      this.$store.state.active = key
-    },
-    async loadStyleChannels () {
-      const { data } = await getStyleChannels()
-      this.stylechannel = data.data.items
-    },
-    async loadAddresChannels () {
-      const { data } = await getAddresChannels()
-      this.addresschannel = data.data.items
-    },
-    async getidcomm (id) {
-      const { data } = await getidComm(id)
-      this.commData = data.data.items
-    },
-    async getidfilm (id) {
-      const { data } = await getfilminfo(id)
-      if (data.code === 200) {
-        this.infodata = data.data
-      } else {
-        this.$message({
-          type: 'error',
-          message: '查询电影信息失败' + data.error
-        })
-      }
-    },
-    async onSubmit () {
-      const fd = {}
-      fd.movie_id = this.id
-      fd.account_name = window.localStorage.getItem('user-account')
-      fd.content = this.mycomm
-      console.log(fd)
-      const { data } = await commitcomm(fd)
-      if (data.code === 200) {
-        this.$message({
-          type: 'success',
-          message: '评论发表成功！！'
-        })
-        this.getidcomm(this.id)
-      } else {
-        this.$message({
-          type: 'error',
-          message: '评论发表失败' + data.error
-        })
-      }
-    },
-    starLevel (evaluate) {
-      return evaluate / 2 // 最高评分为10，星级只有5级 所以需要除2，再四舍五入获取评分数
-    }
   },
   created () {
-    this.id = this.$store.state.keyid
-    this.loadStyleChannels()
-    this.loadAddresChannels()
-    this.getidfilm(this.id)
-    this.getidcomm(this.id)
-    // vue 数据获取存在时间问题
-    setTimeout(() => {
-      this.showscore = this.starLevel(parseInt(this.infodata.score))
-    }, 400)
   }
 }
 </script>
-<style lang="less" scope>
-.head-upload {
-  border-radius: 50%;
-  position: absolute;
-  top: 180px;
-  right: 260px;
-  img {
-    width: 200px;
-    height: 200px;
-  }
+<style lang="less" scoped>
+.new_info {
+    overflow: hidden;
+    margin-top: 20px;
+   span {
+        font-size: 12px;
+        color: #999;
+        float: left;
+    }
+    b {
+        font-size: 12px;
+        color: #999;
+        float: right;
+        font-weight: normal;
+    }
 }
-.el-header,
-.el-footer {
-  // background-color: #ccc;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
+ul {
+    list-style: none;
+    padding:0;
+    margin:0;
 }
-.el-menu-item {
-  img {
-    height: 100%;
-  }
-}
-body > .el-container {
-  margin-bottom: 40px;
-}
-.el-main {
-  .top {
-      position: relative;
+.content_list {
+    margin: 5px 15px;
+     li {
+      height: 59px;
+      border-bottom: 1px dashed #e6e6e6;
       overflow: hidden;
-  }
-  .topbanner {
-      width: 105%;
-      margin-left: -25px;
-      height: 180px;
-      background: url('../../assets/img/banner-blackbig.jpg') no-repeat center center;
-      background-size: cover;
-  }
-  .bottombanner {
-      width: 105%;
-      margin-left: -25px;
-      height: 300px;
-      background:rgb(247, 246, 246);
-  }
-  .toptext {
-      position: absolute;
-      width: 90%;
-      height: 390px;
-      top: 40px;
-      left: 80px;
-      .left {
+       span {
           float: left;
-          height: 100%;
-          width: 25%;
-          box-shadow: 1px 2px 3px 3px #ccc;
-          img {
-              width: 100%;
-          }
+          width: 18px;
+          height: 18px;
+          background-color: #999999;
+          text-align: center;
+          line-height: 18px;
+          color: #fff;
+          font-size: 12px;
+          margin-top: 9px;
       }
-      .right {
-          float: right;
-          height: 100%;
-          width: 75%;
-          text-align: left;
-          box-sizing: border-box;
-          padding-left: 80px;
-          .right-title {
-            color: #fff;
-            height: 90px;
-            width: 100%;
-          }
-          .right-main {
-            margin-top:20px;
-            color: #000;
-            height: 300px;
-            width: 100%;
-            .plot {
-              width: 100%;
-              height: 300px;
-              background: url('../../assets/img/001.png')no-repeat;
-              background-size: contain;
-              p {
-                padding: 30px 25px 25px 103px;
-                line-height: 30px;
-                font-size: 15px;
-              }
-            }
-          }
+      span {
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 20px;
+          background-color: #545c64;
+          border-radius: 50%;
+          margin: 10px 10px 0 0;
       }
-  }
-  .bottom {
-    .el-card__header {
-      padding: 0 10px;
+       b, strong {
+          font-size: 12px;
+          font-weight: normal;
+          float: left;
+          width: 168px;
+          color: #999;
+          margin-top: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+      strong {
+          margin-top: 5px;
+      }
     }
-    .texta {
-      resize:none;
-    }
-  }
 }
-.el-footer {
-  // min-width: 980px;
-  // background: #20232c;
-  color: #666;
-  img {
-    height: 80px;
+  .article_title {
+      text-align: center;
+      font-size: 24px;
+      color: #666;
+      margin-top: 34px;
+      line-height: 30px;
   }
-  .footer-inner {
-    width: 100%;
-    padding: 29px 0 33px;
-  }
-  .footer-inner,
-  .copy-right-conts {
-    margin: 0;
-    background-color: #545c64;
-  }
-  .footer-inner-links {
-    font: 12px/12px "Microsoft Yahei";
-    height: 12px;
-    margin-bottom: 8px;
-    p {
-      display: block;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      margin-inline-start: 0px;
-      margin-inline-end: 0px;
-    }
+  .article_info {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0 15px 0;
+}
+.article_con p {
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 24px;
+    color: #666;
+    text-indent: 28px;
+}
+.article_links {
+    font-size: 12px;
+    color: #999;
+    line-height: 24px;
+    margin-top: 60px;
     a {
-      color: #d5d5d5;
+    color: #999;
     }
+}
+.comment_form {
+    margin-top: 50px;
+    overflow: hidden;
+    .form_group {
+    overflow: hidden;
+    margin-bottom: 15px;
+      label {
+          width: 80px;
+          float: left;
+          font-size: 12px;
+          color: #333;
+          text-align: right;
+          line-height: 24px;
+      }
+      .comment_input {
+          float: left;
+          width: 648px;
+          height: 60px;
+          border-radius: 4px;
+          padding: 10px;
+          outline: none;
+          border: 1px solid #ddd;
+          font-family: 'Microsoft YaHei';
+      }
+       .comment_sub {
+          float: right;
+          width: 58px;
+          height: 28px;
+          border: 1px solid #ddd;
+          background: #fff;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+    }
+}
+.comment_count {
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #ebebeb;
+    padding: 12px 0;
+}
+.fl {
+    float: left;
+}
+.comment_detail_list {
+    border-bottom: 1px solid #ebebeb;
+    overflow: hidden;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    .person_pic {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      background-color: #545c64;
+      border-radius: 50%;
+      color: #fff;
+      text-align: center;
   }
-  .footer-inner-bottom a {
-    font: 12px/28px "Microsoft Yahei";
-    color: #858ca1;
-    display: inline-block;
-    margin-right: 23px;
+    .name_time {
+      width: 680px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+      color: #333;
+      margin: 0 0 5px 20px;
+      b {
+          float: left;
+      }
+      span {
+          float: right;
+          font-size: 12px;
+          color: #999;
+      }
   }
-  a:link,
-  a:visited,
-  a:hover {
-    text-decoration: none;
-  }
+    .comment_text {
+        width: 680px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #333;
+        margin: 5px 0 0 20px;
+        text-align: justify;
+    }
 }
 </style>

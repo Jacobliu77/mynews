@@ -77,6 +77,7 @@ export default {
         color: ['#fff', '#fff', '#fff'],
         series: [{
           type: 'graph',
+          zoom: 0.3, // 这里是关键，一定要放在 series中
           layout: 'force',
           force: {
             repulsion: 500,
