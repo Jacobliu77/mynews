@@ -135,9 +135,7 @@
           <div slot="header" class="clearfix">
               <span style="font-size:20px;font-weight:700"><i style="color:#545c64;font-size:20px" class="el-icon-loading"></i>热词星球</span>
           </div>
-          <div v-for="o in 4" :key="o" class="text item">
-            {{'列表内容 ' + o }}
-          </div>
+        <hot-words></hot-words>
         </el-card>
       </el-aside>
     </el-container>
