@@ -38,6 +38,7 @@
     <el-menu-item index="5"  >科技未来</el-menu-item>
     <el-menu-item index="6"  >金融财经</el-menu-item>
     <el-menu-item index="7"  >个人中心</el-menu-item>
+    <el-menu-item style="margin-left:38%" index="7"  >欢迎你！</el-menu-item>
     </el-menu>
 </div>
 </template>

@@ -153,6 +153,9 @@ export default {
     }
   },
   methods: {
+    currentChange () {
+      console.log('页码变换了')
+    }
   },
   created () {
   }

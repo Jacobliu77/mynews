@@ -9,7 +9,7 @@ import request from '@/utils/request'
 export const login = data => {
   return request({
     method: 'POST',
-    url: '/movie/account/login',
+    url: '/news/manager/login',
     data
   })
 }
@@ -19,7 +19,7 @@ export const login = data => {
 export const register = data => {
   return request({
     method: 'POST',
-    url: '/movie/account/register',
+    url: '/news/manager',
     data
   })
 }

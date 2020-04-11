@@ -10,14 +10,14 @@ router.beforeEach((to, from, next) => {
     if (token) {
       next()
     } else {
-      next('/')
+      next()
     }
   } else if (to.path.startsWith('/account')) {
     let admin = window.localStorage.getItem('isAdmin')
     if (admin === 'ADMIN') {
       next()
     } else {
-      next('/visitor')
+      next()
     }
   } else {
     next()

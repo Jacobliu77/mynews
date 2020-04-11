@@ -24,7 +24,6 @@
                     <b>发布于 2018-08-30 12:18:58</b>
                 </div>
           </div>
-            <el-divider></el-divider>
             <div class="common_news_list">
                 <a href="#" class="list_pic"><img src="../../assets/img/pic03.jpg" alt=""></a>
                 <h4><a href="#">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱,马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</a></h4>
@@ -47,7 +46,6 @@
                     <b>发布于 2018-08-30 12:18:58</b>
                 </div>
           </div>
-            <el-divider></el-divider>
             <div class="common_news_list">
                 <a href="#" class="list_pic"><img src="../../assets/img/pic03.jpg" alt=""></a>
                 <h4><a href="#">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱,马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</a></h4>
@@ -70,7 +68,6 @@
                     <b>发布于 2018-08-30 12:18:58</b>
                 </div>
           </div>
-            <el-divider></el-divider>
             <div class="common_news_list">
                 <a href="#" class="list_pic"><img src="../../assets/img/pic03.jpg" alt=""></a>
                 <h4><a href="#">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱,马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</a></h4>
@@ -154,10 +151,14 @@ export default {
       imgs: ['https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584691787583&di=4e48cc0b077255c1f61e4b7ba9b20965&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200227%2Feed4fc377a514e50a382e64849131946.jpeg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692609687&di=f904d7e1d4821b27c760c1d2aa0cf4ea&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fwallpaper%2F1207%2F09%2Fc1%2F12275680_1341814069050.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692649184&di=eb0cd0c9b17c7a876cd1191bb5b0a0a8&imgtype=0&src=http%3A%2F%2Fpcs4.clubstatic.lenovo.com.cn%2Fdata%2Fattachment%2Fforum%2F201601%2F29%2F090020nejbgt8ckgefjxcc.jpg',
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692432073&di=24f2d937ba25c982312af147bdaa55a2&imgtype=0&src=http%3A%2F%2Fdimg02.c-ctrip.com%2Fimages%2Ffd%2Ftg%2Fg2%2FM02%2F8B%2F33%2FCghzf1Ww3rCAKMvTABUl9T2-0U8651_R_1600_10000_Mtg_7.jpg']
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692432073&di=24f2d937ba25c982312af147bdaa55a2&imgtype=0&src=http%3A%2F%2Fdimg02.c-ctrip.com%2Fimages%2Ffd%2Ftg%2Fg2%2FM02%2F8B%2F33%2FCghzf1Ww3rCAKMvTABUl9T2-0U8651_R_1600_10000_Mtg_7.jpg'],
+      activeName: 'first'
     }
   },
   methods: {
+    handleClick () {
+      console.log('微博知乎热搜切换事件')
+    }
   },
   created () {
   }
