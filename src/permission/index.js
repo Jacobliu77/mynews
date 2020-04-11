@@ -17,7 +17,7 @@ router.beforeEach((to, from, next) => {
     if (admin === 'ADMIN') {
       next()
     } else {
-      next()
+      next('/visitor')
     }
   } else {
     next()

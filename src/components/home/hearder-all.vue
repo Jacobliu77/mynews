@@ -38,7 +38,7 @@
     <el-menu-item index="5"  >科技未来</el-menu-item>
     <el-menu-item index="6"  >金融财经</el-menu-item>
     <el-menu-item index="7"  >个人中心</el-menu-item>
-    <el-menu-item style="margin-left:38%" index="7"  >欢迎你！</el-menu-item>
+    <el-menu-item style="margin-left:35%" index="7" :disabled="isClick" @click="$router.push('/login')"  > <i class="el-icon-user-solid"></i><span v-text="statu">欢迎你！</span></el-menu-item>
     </el-menu>
 </div>
 </template>
@@ -46,12 +46,26 @@
 export default {
   data () {
     return {
-      search: ''
+      search: '',
+      statu: '',
+      isClick: false
     }
   },
   created () {
+    this.getsta()
   },
   methods: {
+    getsta () {
+      var token = window.localStorage.getItem('user-token')
+      var name = window.localStorage.getItem('user-account')
+      if (token) {
+        this.statu = `欢迎你！${name}`
+        this.isClick = true
+      } else {
+        this.statu = `去登录！`
+        this.isClick = false
+      }
+    }
   }
 }
 </script>
