@@ -175,12 +175,12 @@ export default {
           account: this.formdata.mobile,
           password: this.formdata.password,
           email: this.formdata.email,
-          is_admin: false
+          status: 'GENERAL'
         })
         // 跳转到登录页
         if (res.data.code === 200) {
           this.$message.success('注册成功！请到个人中心完善详细信息！！')
-          this.$router.push('/')
+          this.$router.push('/login')
         } else {
           this.$message.error(res.data.error)
         }
@@ -203,12 +203,12 @@ export default {
           account: this.admformdata.mobile,
           password: this.admformdata.password,
           email: this.admformdata.email,
-          is_admin: true
+          status: 'ADMIN'
         })
         // 跳转到登录页
         if (res.data.code === 200) {
           this.$message.success('注册成功！请到个人中心完善详细信息！！')
-          this.$router.push('/')
+          this.$router.push('/login')
         } else {
           this.$message.error(res.data.error)
         }

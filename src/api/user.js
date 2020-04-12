@@ -34,7 +34,7 @@ export const smscode = mobile => {
 export const getUserInfo = () => {
   return request({
     method: 'GET',
-    url: '/app/v1_0/user'
+    url: '/news/manager/'
   })
 }
 // 获取用户的频道分类

@@ -27,32 +27,33 @@
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#ffd04b">
-    <el-submenu index="2" style="margin-left:10%">
+    <el-submenu index="7" style="margin-left:10%;">
         <template slot="title"> <i class="el-icon-menu"></i>所有分类</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
+        <el-menu-item :index="item.id" v-for="item in channels" :key="item.id" style="margin-left:0;text-align:center;">{{item.style}}</el-menu-item>
     </el-submenu>
-    <el-menu-item index="3"  >娱乐演艺</el-menu-item>
-    <el-menu-item index="4"  >国防军事</el-menu-item>
-    <el-menu-item index="5"  >科技未来</el-menu-item>
-    <el-menu-item index="6"  >金融财经</el-menu-item>
-    <el-menu-item index="7"  >个人中心</el-menu-item>
+    <el-menu-item index="1"  >娱乐演艺</el-menu-item>
+    <el-menu-item index="2"  >国防军事</el-menu-item>
+    <el-menu-item index="3"  >科技未来</el-menu-item>
+    <el-menu-item index="4"  >金融财经</el-menu-item>
+    <el-menu-item index="7" @click="tosomewhere"  >个人中心</el-menu-item>
     <el-menu-item style="margin-left:35%" index="7" :disabled="isClick" @click="$router.push('/login')"  > <i class="el-icon-user-solid"></i><span v-text="statu">欢迎你！</span></el-menu-item>
     </el-menu>
 </div>
 </template>
 <script>
+import { getChannels } from '@/api/channel.js'
 export default {
   data () {
     return {
       search: '',
       statu: '',
-      isClick: false
+      isClick: false,
+      channels: []
     }
   },
   created () {
     this.getsta()
+    this.loadChannels()
   },
   methods: {
     getsta () {
@@ -65,6 +66,17 @@ export default {
         this.statu = `去登录！`
         this.isClick = false
       }
+    },
+    tosomewhere () {
+      if (window.localStorage.getItem('isAdmin') === 'ADMIN') {
+        this.$router.push('/account')
+      } else {
+        this.$router.push('/visitor')
+      }
+    },
+    async loadChannels () {
+      const { data } = await getChannels()
+      this.channels = data.data.items
     }
   }
 }
