@@ -26,13 +26,13 @@
             <el-input type="text" v-model="formData.name" style="width:40%"></el-input>
           </el-form-item>
           <el-form-item label="个人头像" prop="photo">
-            <el-input type="text" v-model="formData.image" placeholder="请输入百度图库图片地址" style="width:40%"></el-input>
+            <el-input type="text" v-model="formData.headImage" placeholder="请输入百度图库图片地址" style="width:40%"></el-input>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="formData.email" style="width:40%"></el-input>
           </el-form-item>
           <el-form-item label="手机" prop="mobile">
-            <el-input v-model="formData.telephone" style="width:40%" ></el-input>
+            <el-input v-model="formData.phone" style="width:40%" ></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="saveInfo">提交</el-button>
@@ -41,7 +41,7 @@
         </el-form>
         <div class="imgblock">
             <span class="demonstration">个人头像预览</span>
-            <el-image :src="formData.image ? formData.image : picurl">
+            <el-image :src="formData.headImage ? formData.headImage : picurl">
               <div slot="placeholder" class="image-slot" style="margin-top:20px">
                 加载中<span class="dot">...</span>
               </div>
@@ -88,7 +88,6 @@
 </template>
 
 <script>
-import { getStyleChannels, getAddresChannels } from '@/api/channel.js'
 import { getuserinfo, updateInfo, repassword } from '@/api/account.js'
 export default {
   data () {
@@ -216,19 +215,9 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
-    },
-    async loadStyleChannels () {
-      const { data } = await getStyleChannels()
-      this.stylechannel = data.data.items
-    },
-    async loadAddresChannels () {
-      const { data } = await getAddresChannels()
-      this.addresschannel = data.data.items
     }
   },
   created () {
-    this.loadStyleChannels()
-    this.loadAddresChannels()
     this.getuserinfo()
   }
 }

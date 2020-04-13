@@ -14,6 +14,7 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.path.startsWith('/account')) {
     let admin = window.localStorage.getItem('isAdmin')
+    console.log(admin)
     if (admin) {
       next()
     } else {

@@ -174,8 +174,7 @@ export default {
         const res = await register({
           account: this.formdata.mobile,
           password: this.formdata.password,
-          email: this.formdata.email,
-          status: 'GENERAL'
+          email: this.formdata.email
         })
         // 跳转到登录页
         if (res.data.code === 200) {

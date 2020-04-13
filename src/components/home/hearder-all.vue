@@ -29,14 +29,15 @@
     active-text-color="#ffd04b">
     <el-submenu index="7" style="margin-left:10%;">
         <template slot="title"> <i class="el-icon-menu"></i>所有分类</template>
-        <el-menu-item :index="item.id" v-for="item in channels" :key="item.id" style="margin-left:0;text-align:center;">{{item.style}}</el-menu-item>
+        <el-menu-item :index="item.id.toString()" v-for="item in channels" :key="item.id" style="margin-left:0;text-align:center;">{{item.style}}</el-menu-item>
     </el-submenu>
     <el-menu-item index="1"  >娱乐演艺</el-menu-item>
     <el-menu-item index="2"  >国防军事</el-menu-item>
     <el-menu-item index="3"  >科技未来</el-menu-item>
     <el-menu-item index="4"  >金融财经</el-menu-item>
     <el-menu-item index="7" @click="tosomewhere"  >个人中心</el-menu-item>
-    <el-menu-item style="margin-left:35%" index="7" :disabled="isClick" @click="$router.push('/login')"  > <i class="el-icon-user-solid"></i><span v-text="statu">欢迎你！</span></el-menu-item>
+    <el-menu-item style="margin-left:25%" index="7" :disabled="isClick" @click="$router.push('/login')"  > <i class="el-icon-user-solid"></i><span v-text="statu">欢迎你！</span></el-menu-item>
+    <el-menu-item :disabled="!isClick" style="margin-left:0"  index="8" @click="logout()"><span>安全登出</span></el-menu-item>
     </el-menu>
 </div>
 </template>
@@ -47,8 +48,8 @@ export default {
     return {
       search: '',
       statu: '',
-      isClick: false,
-      channels: []
+      channels: [],
+      isClick: false
     }
   },
   created () {
@@ -68,11 +69,19 @@ export default {
       }
     },
     tosomewhere () {
-      if (window.localStorage.getItem('isAdmin') === 'ADMIN') {
+      if (window.localStorage.getItem('isAdmin') === 'true') {
         this.$router.push('/account')
       } else {
         this.$router.push('/visitor')
       }
+    },
+    logout () {
+      window.localStorage.removeItem('user-token')
+      window.localStorage.removeItem('user-account')
+      window.localStorage.removeItem('isAdmin')
+      window.localStorage.removeItem('accountid')
+      this.$router.push('/')
+      this.getsta()
     },
     async loadChannels () {
       const { data } = await getChannels()

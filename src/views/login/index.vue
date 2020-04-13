@@ -79,8 +79,8 @@ export default {
         }
         // console.log(res.data)
         window.localStorage.setItem('user-token', res.data.data.token)
-        // window.localStorage.setItem('isAdmin', res.data.data.isAdmin)
-        window.localStorage.setItem('isAdmin', true)
+        window.localStorage.setItem('isAdmin', res.data.data.isAdmin)
+        // window.localStorage.setItem('isAdmin', true)
         window.localStorage.setItem('user-account', res.data.data.account)
         window.localStorage.setItem('accountid', res.data.data.id)
         // 跳转到首页

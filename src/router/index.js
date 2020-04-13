@@ -10,7 +10,10 @@ import search from '@/views/search'
 import details from '@/views/details'
 
 Vue.use(VueRouter)
-
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (to) {
+  return VueRouterPush.call(this, to).catch(err => err)
+}
 const routes = [
   {
     path: '/home',
@@ -102,7 +105,6 @@ const routes = [
   // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
 ]
-
 const router = new VueRouter({
   routes
 })
