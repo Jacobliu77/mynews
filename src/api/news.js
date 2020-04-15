@@ -34,3 +34,9 @@ export const searchfilm = params => {
     url: `/movie/search?name=${params}`
   })
 }
+export const recentcomm = () => {
+  return request({
+    method: 'GET',
+    url: `/news/comment/recent`
+  })
+}

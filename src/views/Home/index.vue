@@ -35,35 +35,10 @@
               <span style="font-size:20px;font-weight:700"><i style="color:#545c64;font-size:20px" class="el-icon-s-comment"></i>最新评论</span>
           </div>
           <ul class="content_list comment_list">
-                    <li>
-                        <span>山</span>
-                        <b><em>山治</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>丽</span>
-                        <b><em>丽丽</em> 9个月前(08-14)说:9个月前(08-14)说:9个月前(08-14)说:</b>
-                        <strong>挺会玩的挺会玩的挺会玩的挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>R</span>
-                        <b><em>Rechael</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>J</span>
-                        <b><em>John</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>段</span>
-                        <b><em>段正淳</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>乔</span>
-                        <b><em>乔峰</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
+                    <li v-for="items in recent" :key="items.id">
+                        <span>{{items.author.charAt(0)}}</span>
+                        <b><em style="color:skyblue">{{items.author}}</em> &nbsp;&nbsp;&nbsp;在  {{items.createTime}}说:</b>
+                        <strong>{{items.content}}</strong>
                     </li>
                 </ul>
         </el-card>
@@ -81,7 +56,7 @@
   </el-container>
 </template>
 <script>
-import { gethotnews } from '@/api/news.js'
+import { gethotnews, recentcomm } from '@/api/news.js'
 export default {
   name: 'home',
   components: {},
@@ -92,6 +67,7 @@ export default {
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692649184&di=eb0cd0c9b17c7a876cd1191bb5b0a0a8&imgtype=0&src=http%3A%2F%2Fpcs4.clubstatic.lenovo.com.cn%2Fdata%2Fattachment%2Fforum%2F201601%2F29%2F090020nejbgt8ckgefjxcc.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692432073&di=24f2d937ba25c982312af147bdaa55a2&imgtype=0&src=http%3A%2F%2Fdimg02.c-ctrip.com%2Fimages%2Ffd%2Ftg%2Fg2%2FM02%2F8B%2F33%2FCghzf1Ww3rCAKMvTABUl9T2-0U8651_R_1600_10000_Mtg_7.jpg'],
       hotnews: [],
+      recent: [],
       morenp: ' https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586945111561&di=5d655776ef6f3dde092c754c6c7e43c7&imgtype=0&src=http%3A%2F%2Fpic.soutu123.cn%2Felement_origin_min_pic%2F01%2F37%2F92%2F40573c69065b76e.jpg%2521%2Ffw%2F700%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue'
     }
   },
@@ -100,10 +76,16 @@ export default {
       const { data } = await gethotnews()
       this.hotnews = data.data.items
       // console.log(this.hotnews)
+    },
+    async loadRecentComm () {
+      const { data } = await recentcomm()
+      this.recent = data.data.items
+      // console.log(this.recent)
     }
   },
   created () {
     this.loadHotNews()
+    this.loadRecentComm()
   }
 }
 </script>

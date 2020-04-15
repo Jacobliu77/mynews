@@ -76,7 +76,7 @@ export default {
       // console.log('微博知乎热搜切换事件')
       this.$message({
         type: 'success',
-        message: '这就为您展示时间！！'
+        message: '这就为您切换显示！！'
       })
     },
     time () {
@@ -103,6 +103,7 @@ export default {
             border-bottom: dashed 3px #ccc;
             a{
                 text-decoration: none;
+                color: rgb(131, 119, 240);
             }
         }
     }
