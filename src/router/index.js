@@ -35,7 +35,7 @@ const routes = [
     component: visitor
   },
   {
-    path: '/search/:id',
+    path: '/search',
     name: 'search',
     component: search
   },

@@ -8,35 +8,10 @@
               <span style="font-size:20px;font-weight:700"><i style="color:#545c64;font-size:20px" class="el-icon-s-comment"></i>最新评论</span>
           </div>
           <ul class="content_list comment_list">
-                    <li>
-                        <span>山</span>
-                        <b><em>山治</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>丽</span>
-                        <b><em>丽丽</em> 9个月前(08-14)说:9个月前(08-14)说:9个月前(08-14)说:</b>
-                        <strong>挺会玩的挺会玩的挺会玩的挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>R</span>
-                        <b><em>Rechael</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>J</span>
-                        <b><em>John</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>段</span>
-                        <b><em>段正淳</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
-                    </li>
-                    <li>
-                        <span>乔</span>
-                        <b><em>乔峰</em> 9个月前(08-14)说:</b>
-                        <strong>挺会玩的</strong>
+                      <li v-for="items in recent" :key="items.id">
+                        <span>{{items.author.charAt(0)}}</span>
+                        <b><em style="color:skyblue">{{items.author}}</em> &nbsp;&nbsp;&nbsp;在  {{items.createTime}}说:</b>
+                        <strong>{{items.content}}</strong>
                     </li>
                 </ul>
         </el-card>
@@ -140,7 +115,7 @@
   </el-container>
 </template>
 <script>
-
+import { recentcomm } from '@/api/news.js'
 export default {
   name: 'home',
   components: {},
@@ -149,15 +124,22 @@ export default {
       pageSize: 5,
       totalcomm: 0,
       currentPage: 1,
-      totalpage: 0
+      totalpage: 0,
+      recent: []
     }
   },
   methods: {
     currentChange () {
       console.log('页码变换了')
+    },
+    async loadRecentComm () {
+      const { data } = await recentcomm()
+      this.recent = data.data.items
+      // console.log(this.recent)
     }
   },
   created () {
+    this.loadRecentComm()
   }
 }
 </script>
