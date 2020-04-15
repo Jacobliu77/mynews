@@ -12,12 +12,13 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Component)
 // Vue.prototype.$axios = axios
+
+Vue.filter('dateformat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+  return moment(dataStr).format(pattern)
+})
+
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
-
-Vue.filter('dateformat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
-  return moment(dataStr).format(pattern)
-})

@@ -3,6 +3,7 @@ import layoutHeader from './home/layout-header'
 import HeaderAll from './home/hearder-all'
 import Footer from './home/footer'
 import Echarts from './home/hotwords'
+import weibo from './home/weibo'
 import breadCrumb from './common/bread-crumb'
 import breadCrumbFront from './common/bread-crumb-front'
 import { quillEditor } from 'vue-quill-editor' // quill编辑器组件对象
@@ -22,6 +23,7 @@ export default {
     Vue.component('select-image', SelectImage) // 注册一个封面组件
     Vue.component('header-all', HeaderAll) // 注册头
     Vue.component('footer-all', Footer) // 注册尾
-    Vue.component('hot-words', Echarts) // 注册尾
+    Vue.component('hot-words', Echarts) // 注册热词星球
+    Vue.component('weibo', weibo) // 注册微博热搜榜
   }
 }

@@ -27,12 +27,8 @@
       </el-main>
       <el-aside width="300px" style="margin-top:20px">
         <el-card style="width:99%;height:450px">
-          <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-            <el-tab-pane label="微博热搜" name="first">
-              <iframe src="https://s.weibo.com/top/summary" width="90%" frameborder="0"></iframe>
-            </el-tab-pane>
-            <el-tab-pane label="知乎热搜" name="second">配置管理</el-tab-pane>
-          </el-tabs>
+          <!-- 热搜榜 -->
+          <weibo></weibo>
         </el-card>
         <el-card class="comm-card" style="text-align:left;margin-top:20px;padding:0">
           <div slot="header" class="clearfix" >
@@ -95,19 +91,15 @@ export default {
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692609687&di=f904d7e1d4821b27c760c1d2aa0cf4ea&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fwallpaper%2F1207%2F09%2Fc1%2F12275680_1341814069050.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692649184&di=eb0cd0c9b17c7a876cd1191bb5b0a0a8&imgtype=0&src=http%3A%2F%2Fpcs4.clubstatic.lenovo.com.cn%2Fdata%2Fattachment%2Fforum%2F201601%2F29%2F090020nejbgt8ckgefjxcc.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584692432073&di=24f2d937ba25c982312af147bdaa55a2&imgtype=0&src=http%3A%2F%2Fdimg02.c-ctrip.com%2Fimages%2Ffd%2Ftg%2Fg2%2FM02%2F8B%2F33%2FCghzf1Ww3rCAKMvTABUl9T2-0U8651_R_1600_10000_Mtg_7.jpg'],
-      activeName: 'first',
       hotnews: [],
-      morenp: '@/assets/img/moren.jpg'
+      morenp: ' https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586945111561&di=5d655776ef6f3dde092c754c6c7e43c7&imgtype=0&src=http%3A%2F%2Fpic.soutu123.cn%2Felement_origin_min_pic%2F01%2F37%2F92%2F40573c69065b76e.jpg%2521%2Ffw%2F700%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue'
     }
   },
   methods: {
-    handleClick () {
-      console.log('微博知乎热搜切换事件')
-    },
     async loadHotNews () {
       const { data } = await gethotnews()
       this.hotnews = data.data.items
-      console.log(this.hotnews)
+      // console.log(this.hotnews)
     }
   },
   created () {
