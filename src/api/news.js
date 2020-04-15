@@ -1,12 +1,12 @@
 /**
- * 电影接口管理模块
+ * 新闻接口管理模块
  */
 import request from '@/utils/request'
 
-export const getfilminfo = params => {
+export const gethotnews = () => {
   return request({
     method: 'GET',
-    url: `/movie/${params}`
+    url: `/news/hot`
   })
 }
 export const savefilminfo = fd => {

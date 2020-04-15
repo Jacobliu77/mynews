@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { getfilminfo, delfilm } from '@/api/film.js'
+// import { getfilminfo, delfilm } from '@/api/film.js'
 export default {
   data () {
     return {
@@ -61,29 +61,29 @@ export default {
   },
   methods: {
     async getidfilm (id) {
-      const { data } = await getfilminfo(id)
-      if (data.code === 200) {
-        this.filmData = data.data
-      } else {
-        this.$message({
-          type: 'error',
-          message: '查询电影信息失败' + data.error
-        })
-      }
+      // const { data } = await getfilminfo(id)
+      // if (data.code === 200) {
+      //   this.filmData = data.data
+      // } else {
+      //   this.$message({
+      //     type: 'error',
+      //     message: '查询电影信息失败' + data.error
+      //   })
+      // }
     },
     async delidfilm (id) {
-      const { data } = await delfilm(id)
-      if (data.code === 200) {
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
-      } else {
-        this.$message({
-          type: 'error',
-          message: '查询电影信息失败' + data.error
-        })
-      }
+      // const { data } = await delfilm(id)
+      // if (data.code === 200) {
+      //   this.$message({
+      //     type: 'success',
+      //     message: '删除成功!'
+      //   })
+      // } else {
+      //   this.$message({
+      //     type: 'error',
+      //     message: '查询电影信息失败' + data.error
+      //   })
+      // }
     },
     getid () {
       this.getidfilm(this.idinput)

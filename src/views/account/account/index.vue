@@ -20,7 +20,7 @@
         <el-input type="text" v-model="formData.name" style="width:40%"></el-input>
       </el-form-item>
       <el-form-item label="个人头像" prop="photo">
-        <el-input type="text" v-model="formData.image" placeholder="请输入百度图库图片地址" style="width:40%"></el-input>
+        <el-input type="text" v-model="formData.headImage" placeholder="请输入百度图库图片地址" style="width:40%"></el-input>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="formData.email" style="width:40%"></el-input>
@@ -35,7 +35,7 @@
     </el-form>
     <div class="imgblock">
         <span class="demonstration">个人头像预览</span>
-        <el-image :src="formData.image ? formData.image : picurl">
+        <el-image :src="formData.headImage ? formData.headImage : picurl">
           <div slot="placeholder" class="image-slot" style="margin-top:20px">
             加载中<span class="dot">...</span>
           </div>
@@ -49,7 +49,7 @@ import { getuserinfo, updateInfo } from '@/api/account.js'
 export default {
   data () {
     return {
-      picurl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=347128054,3544728610&fm=26&gp=0.jpg',
+      picurl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586945111561&di=5d655776ef6f3dde092c754c6c7e43c7&imgtype=0&src=http%3A%2F%2Fpic.soutu123.cn%2Felement_origin_min_pic%2F01%2F37%2F92%2F40573c69065b76e.jpg%2521%2Ffw%2F700%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue',
       formData: {
       },
       rules: {
@@ -92,10 +92,10 @@ export default {
       let fd = {}
       fd.account = this.formData.account
       fd.name = this.formData.name
-      fd.image = this.formData.image
+      fd.headImage = this.formData.headImage
       fd.email = this.formData.email
-      fd.telephone = this.formData.telephone
-      const id = this.$store.state.accountid
+      fd.phone = this.formData.telephone
+      const id = window.localStorage.getItem('accountid')
       const { data } = await updateInfo(fd)
       if (data.code === 200) {
         this.$message({

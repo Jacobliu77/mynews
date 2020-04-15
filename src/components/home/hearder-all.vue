@@ -81,6 +81,10 @@ export default {
       window.localStorage.removeItem('isAdmin')
       window.localStorage.removeItem('accountid')
       this.$router.push('/')
+      this.$message({
+        type: 'success',
+        message: '账户登出成功!'
+      })
       this.getsta()
     },
     async loadChannels () {
