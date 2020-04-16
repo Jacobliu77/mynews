@@ -75,12 +75,12 @@ const routes = [
         component: () => import('../views/account/comment/get')
       },
       {
-        path: 'film/addfilm', // 添加电影
-        component: () => import('../views/account/film/add')
+        path: 'news/add', // 添加资讯文章
+        component: () => import('../views/account/news/add')
       },
       {
-        path: 'film/getfilminfo', // 获取电影操作
-        component: () => import('../views/account/film/getinfo')
+        path: 'news/getnewsinfo', // 获取资讯文章
+        component: () => import('../views/account/news/getinfo')
       },
       {
         path: 'admin/find', // 获取电影详情

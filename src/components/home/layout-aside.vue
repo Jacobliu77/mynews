@@ -1,7 +1,7 @@
 <template>
   <div class="layout-aside">
     <div class="title">
-      <img src="../../assets/img/icon.png" alt />
+    <img src="../../assets/img/icon.png" alt @click="$router.push('/home')" />
     </div>
     <!-- 左侧导航组件  开启路由 :router="true" 或者 router-->
     <el-menu
@@ -12,7 +12,7 @@
       :collapse="$store.state.isforder"
     >
       <!-- 没有折叠选项 -->
-      <el-menu-item index="/home">
+      <el-menu-item index="/account">
         <i class="el-icon-s-data"></i>
         <span>首页</span>
       </el-menu-item>
@@ -33,8 +33,8 @@
           <span>文章管理中心</span>
         </template>
         <!-- 匿名插槽 -->
-        <el-menu-item index="/account/film/addfilm">添加文章</el-menu-item>
-        <el-menu-item index="/account/film/getfilminfo">文章操作</el-menu-item>
+        <el-menu-item index="/account/news/add">添加文章</el-menu-item>
+        <el-menu-item index="/account/news/getnewsinfo">文章操作</el-menu-item>
       </el-submenu>
        <el-submenu index="3">
         <!-- 具名插槽 -->

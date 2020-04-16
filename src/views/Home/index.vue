@@ -18,8 +18,8 @@
                 <h4><a href="#">{{items.title}} </a></h4>
                 <p>{{items.newsAbstract}}</p>
                 <div class="new_info">
-                    <span>标签：{{items.newsTypes.type}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( 5
-                        )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论( 10 )</span>
+                    <span>标签：{{items.newsTypes.type}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( {{items.readNum}}
+                        )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论热度( {{items.commentNum}} )</span>
                     <b>发布于 2018-08-30 12:18:58</b>
                 </div>
           </div>

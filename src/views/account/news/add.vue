@@ -5,31 +5,38 @@
     <bread-crumb slot="header">
       <template slot="title">新闻管理 <span style="font-weight:700;color:#ccc">></span> 添加文章</template>
     </bread-crumb>
-    <el-form ref="publishForm" :model="formData" :rules="publishRules" style="margin-left:50px" label-width="100px">
+    <el-form ref="publishForm" :model="formData" :rules="publishRules" style="margin-left:50px;text-align:left;" label-width="100px">
           <el-form-item prop="title" label="标题">
               <el-input v-model="formData.title" style="width:60%"></el-input>
+          </el-form-item>
+          <el-form-item prop="abstract" label="摘要">
+              <el-input
+                type="textarea"
+                :rows="3"
+                placeholder="请输入摘要内容"
+                v-model="formData.abstract"
+                style="width:60%">
+              </el-input>
           </el-form-item>
           <el-form-item prop="content" label="内容">
                 <quill-editor
                 v-model="formData.content"
-                style="height:220px"
+                style="height:320px"
                 ></quill-editor>
           </el-form-item>
-          <el-form-item style="margin-top:120px"  prop="cover" label="封面">
-              <el-radio-group @change="changeType"  v-model="formData.cover.type">
-                  <!-- // 封面类型 -1:自动，0-无图，1-1张，3-3张 -->
-                  <el-radio :label="1">单图</el-radio>
-                  <el-radio :label="3">三图</el-radio>
-                  <el-radio :label="0">无图</el-radio>
-                  <el-radio :label="-1">自动</el-radio>
-              </el-radio-group>
+          <el-form-item style="margin-top:120px"  prop="cover" label="封面路径">
+            <el-input v-model="formData.picture" style="width:60%"></el-input>
           </el-form-item>
-          <!-- 封面组件 -->
-          <cover-image @selectTwoImg="receiveImg" :list="formData.cover.images"></cover-image>
           <el-form-item prop="channel_id" label="频道">
               <el-select v-model="formData.channel_id">
-                  <el-option v-for="item in channels" :value="item.id" :label="item.name" :key="item.id"></el-option>
+                  <el-option v-for="item in channels" :value="item.id" :label="item.style" :key="item.id"></el-option>
               </el-select>
+          </el-form-item>
+          <el-form-item style=""  prop="readNum" label="阅读量">
+            <el-input v-model="formData.readNum" style="width:20%"></el-input>
+          </el-form-item>
+          <el-form-item style=""  prop="commentNum" label="讨论热度">
+            <el-input v-model="formData.commentNum" style="width:20%"></el-input>
           </el-form-item>
           <el-form-item>
               <el-button @click="publishArticle()" type='primary'>发布</el-button>
@@ -49,14 +56,12 @@ export default {
   data () {
     return {
       loading: false,
-      channels: [], // 接收频道数据
+      channels: [],
       formData: {
         title: '', // 文章标题
         content: '', // 文章内容
-        cover: {
-          type: 0, // 封面类型 -1:自动，0-无图，1-1张，3-3张
-          images: [] // 放置封面地址的数组
-        },
+        abstract: '',
+        picture: '',
         channel_id: null // 频道id
       },
       publishRules: {
@@ -66,6 +71,11 @@ export default {
           max: 30,
           message: '标题的长度在5到30个字符之间'
         }],
+        abstract: [{ required: true, message: '文章摘要不能为空' }, {
+          min: 20,
+          max: 50,
+          message: '标题的长度在20到50个字符之间'
+        }],
         content: [{ required: true, message: '文章内容不能为空' }],
         channel_id: [{ required: true, message: '文章频道不能为空' }]
       }
@@ -74,7 +84,7 @@ export default {
   methods: {
     async loadChannels () {
       const { data } = await getChannels()
-      this.typeoptions = data.data.items
+      this.channels = data.data.items
     },
     async savenews () {
       // const fd = this.formData

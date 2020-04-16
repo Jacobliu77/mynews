@@ -22,10 +22,10 @@ export const delfilm = params => {
     url: `/movie/${params}`
   })
 }
-export const sortserchfilm = (paramsa, paramsb) => {
+export const getnewslist = (page, size) => {
   return request({
     method: 'GET',
-    url: `/movie/list?area=${paramsa}&sort=${paramsb}`
+    url: `/news/list?page=${page}&pageSize=${size}`
   })
 }
 export const searchfilm = params => {

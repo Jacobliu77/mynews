@@ -1,25 +1,33 @@
 <template>
-  <div>
-    <el-card>
-      <bread-crumb slot="header">
+
+<div>
+     <el-card>
+     <bread-crumb slot="header">
         <template slot="title">
-          电影评论管理
+          资讯文章管理
         </template>
       </bread-crumb>
       <el-input v-model="idinput" style="margin-bottom:20px" placeholder="请输入对应文章id"></el-input>
       <el-button  type="primary" icon="el-icon-search" @click="getid" circle></el-button>
       <el-divider></el-divider>
       <el-table :data="commData" style="width: 100%">
-        <el-table-column prop="id" label="评论id" width="180"></el-table-column>
-        <el-table-column prop="createTime" label="日期" width="280" ></el-table-column>
-        <el-table-column prop="author" label="留言者" width="180"></el-table-column>
-        <el-table-column prop="newsId" label="对应文章id" width="180"></el-table-column>
-        <el-table-column prop="content" label="留言内容"></el-table-column>
+        <el-table-column prop="id" label="文章id" width="180"></el-table-column>
+        <el-table-column prop="id" label="文章封面" width="180">
+          <template  slot-scope="scope">
+              <img :src="scope.row.picture" width="100" height="80" alt=""/>
+          </template>
+        </el-table-column>
+        <el-table-column prop="releaseTime" label="创建日期" width="280" ></el-table-column>
+        <el-table-column prop="title" label="标题"></el-table-column>
+        <el-table-column prop="author" label="作者" width="180"></el-table-column>
+        <el-table-column prop="readNum" label="阅读量"></el-table-column>
+        <el-table-column prop="state" label="文章状态" width="180"></el-table-column>
          <el-table-column
             label="操作"
             width="100">
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
+              <el-button @click="handleClick(scope.row)" type="text" size="small">发布</el-button>
             </template>
           </el-table-column>
       </el-table>
@@ -30,12 +38,13 @@
         :page-size="pageSize"
         @current-change="currentChange"
         :total="totalcomm"></el-pagination>
-    </el-card>
-  </div>
+      </el-card>
+</div>
+
 </template>
 
 <script>
-import { getComm, getidComm, delComm } from '@/api/comment.js'
+import { getnewslist } from '@/api/news.js'
 export default {
   data () {
     return {
@@ -49,27 +58,28 @@ export default {
     }
   },
   methods: {
-    async getallcomm () {
+    async getalllist () {
       const page = (this.currentPage) - 1
       const pagesize = this.pageSize
-      const { data } = await getComm(page, pagesize)
+      const { data } = await getnewslist(page, pagesize)
+      console.log(data)
       this.commData = data.data.items
       this.totalcomm = data.data.totalElements
       this.totalpage = data.data.totalPages
     },
-    async getidcomm (id) {
-      const { data } = await getidComm(id)
-      this.commData = data.data.items
-      this.totalcomm = data.data.totalElements
-      this.totalpage = data.data.totalPages
-    },
+    // async getidcomm (id) {
+    //   const { data } = await getidComm(id)
+    //   this.commData = data.data.items
+    //   this.totalcomm = data.data.totalElements
+    //   this.totalpage = data.data.totalPages
+    // },
     currentChange () {
-      this.getallcomm()
+      this.getalllist()
     },
-    async delidcomm (id) {
-      await delComm(id)
-      this.getallcomm()
-    },
+    // async delidcomm (id) {
+    //   await delComm(id)
+    //   this.getalllist()
+    // },
     getid () {
       this.getidcomm(this.idinput)
     },
@@ -97,10 +107,12 @@ export default {
     }
   },
   created () {
-    this.getallcomm()
+    this.getalllist()
   }
 }
+
 </script>
 
 <style>
+
 </style>
