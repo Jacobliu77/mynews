@@ -51,7 +51,6 @@ const routes = [
   },
   {
     path: '/account',
-    name: 'account',
     component: account,
     children: [
       {

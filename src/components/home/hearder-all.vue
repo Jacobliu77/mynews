@@ -59,10 +59,12 @@ export default {
   methods: {
     searchname (name) {
       this.$store.commit('setsearchname', name)
+      window.localStorage.setItem('by', 0)
       this.$router.push('/search')
     },
     searchtype (type) {
       this.$store.commit('setsearchtype', type)
+      window.localStorage.setItem('by', 1)
       this.$router.push('/search')
     },
     getsta () {

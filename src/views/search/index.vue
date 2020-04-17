@@ -1,11 +1,52 @@
 <template>
   <el-container class="" style="width:100%;text-align:center;">
-    <header-all></header-all>
-     <el-container style="width:80%;margin-left:10%;" >
+    <el-header>
+      <div>
+        <el-header class="el-header" style="height: 70px;width:80%;margin-left:10%;line-height: 70px">
+            <el-row type="flex" justify="space-between" style="height:80px">
+              <el-col :span="4" style="text-align:left">
+                <div class="leftimg">
+                    <img src="../../assets/img/icon.png" alt="">
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="middlesearch">
+                  <el-input style="width:115%;margin-top:25px" placeholder="请输入内容" v-model="search" class="input-with-select">
+                    <el-button  slot="append" icon="el-icon-search" @click="searchname(search)"></el-button>
+                  </el-input>
+                </div>
+              </el-col>
+              <el-col :span="6"><div class="rightherf" style="margin-top:25px"></div>
+              <p style="line-height:0px"> <a style="text-decoration: none;" target="black" href="https://github.com/Jacobliu77/mynews"><i class="el-icon-link"></i>Github仓库</a> </p>
+              <p style="line-height:0px"> <a style="text-decoration: none;" target="black" href="https://jacobliu77.github.io"><i class="el-icon-link"></i>个人博客</a> </p>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-menu
+          class="el-menu-demo"
+          mode="horizontal"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b">
+          <el-submenu index="7" style="margin-left:10%;">
+              <template slot="title"> <i class="el-icon-menu"></i>所有分类</template>
+              <el-menu-item :index="item.id.toString()" v-for="item in channels" :key="item.id" @click="searchtype(item.style)" style="margin-left:0;text-align:center;">{{item.style}}</el-menu-item>
+          </el-submenu>
+          <el-menu-item index="1" @click="searchtype('娱乐演艺')"  >娱乐演艺</el-menu-item>
+          <el-menu-item index="2"  @click="searchtype('国防军事')" >国防军事</el-menu-item>
+          <el-menu-item index="3"  @click="searchtype('科技未来')" >科技未来</el-menu-item>
+          <el-menu-item index="4"  @click="searchtype('金融财经')" >金融财经</el-menu-item>
+          <el-menu-item index="7" :disabled="!isClick" @click="tosomewhere"  >个人中心</el-menu-item>
+          <el-menu-item style="margin-left:25%" index="7" :disabled="isClick" @click="$router.push('/login')"  > <i class="el-icon-user-solid"></i><span v-text="statu">欢迎你！</span></el-menu-item>
+          <el-menu-item :disabled="!isClick" style="margin-left:0"  index="8" @click="logout()"><span>安全登出</span></el-menu-item>
+          </el-menu>
+      </div>
+    </el-header>
+     <el-container style="width:80%;margin-left:10%;margin-top:6%" >
       <el-aside width="300px" style="margin-top:0px">
         <el-card class="comm-card" style="text-align:left;margin-top:20px;padding:0">
           <div slot="header" class="clearfix" >
-              <span style="font-size:20px;font-weight:700"><i style="color:#545c64;font-size:20px" class="el-icon-s-comment"></i>最新评论</span>
+              <span style="font-size:20px;font-weight:700"><i style="color:#545c64;font-size:20px" class="el-icon-s-comment"></i>  最新评论</span>
           </div>
           <ul class="content_list comment_list">
                       <li v-for="items in recent" :key="items.id">
@@ -25,87 +66,18 @@
       <el-main style="">
         <el-card class="hot-card" style="text-align:left;">
           <div slot="header" class="clearfix">
-            <span style="font-size:28px;font-weight:700"><i style="color:#545c64;font-size:32px" class="el-icon-finished"></i>  最热推荐</span>
-            <el-button style="float: right; padding: 3px 0;font-size:30px" type="text">>></el-button>
+            <span style="font-size:28px;font-weight:700"><i style="color:#545c64;font-size:32px" class="el-icon-finished"></i>  相关结果列表</span>
           </div>
-          <div class="common_news_list">
-                  <a href="#" class="list_pic"><img src="../../assets/img/pic09.jpg" alt=""></a>
-                  <h4><a href="#">亚马逊金融试水中国？背后却是和华尔街的“金融战争” </a></h4>
-                  <p>亚马逊抛弃了中国的买家们，却难以割舍庞大的卖家市场，有消息指出亚马逊中国将针对中国庞大的卖家群体推出一项贷款推荐计划。在连续对印度、墨西哥等新兴市场大力推广线上支付服务后，亚马逊金融试水进军中国市场的信号终于被放出。
-                  </p>
-                  <div class="new_info">
-                      <span>标签：财经&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( 5
-                          )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论( 10 )</span>
-                      <b>发布于 2018-08-30 12:18:58</b>
-                  </div>
-            </div>
-              <el-divider></el-divider>
-              <div class="common_news_list">
-                  <a href="#" class="list_pic"><img src="../../assets/img/pic03.jpg" alt=""></a>
-                  <h4><a href="#">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱,马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</a></h4>
-                  <p>亚马逊抛弃了中国的买家们，却难以割舍庞大的卖家市场，有消息指出亚马逊中国将针对中国庞大的卖家群体推出一项贷款推荐计划。在连续对印度、墨西哥等新兴市场大力推广线上支付服务后，亚马逊金融试水进军中国市场的信号终于被放出。
-                  </p>
-                  <div class="new_info">
-                      <span>标签：财经&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( 5
-                          )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论( 10 )</span>
-                      <b>发布于 2018-08-30 12:18:58</b>
-                  </div>
-              </div>
-              <div class="common_news_list">
-                  <a href="#" class="list_pic"><img src="../../assets/img/pic09.jpg" alt=""></a>
-                  <h4><a href="#">亚马逊金融试水中国？背后却是和华尔街的“金融战争” </a></h4>
-                  <p>亚马逊抛弃了中国的买家们，却难以割舍庞大的卖家市场，有消息指出亚马逊中国将针对中国庞大的卖家群体推出一项贷款推荐计划。在连续对印度、墨西哥等新兴市场大力推广线上支付服务后，亚马逊金融试水进军中国市场的信号终于被放出。
-                  </p>
-                  <div class="new_info">
-                      <span>标签：财经&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( 5
-                          )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论( 10 )</span>
-                      <b>发布于 2018-08-30 12:18:58</b>
-                  </div>
-            </div>
-              <el-divider></el-divider>
-              <div class="common_news_list">
-                  <a href="#" class="list_pic"><img src="../../assets/img/pic03.jpg" alt=""></a>
-                  <h4><a href="#">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱,马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</a></h4>
-                  <p>亚马逊抛弃了中国的买家们，却难以割舍庞大的卖家市场，有消息指出亚马逊中国将针对中国庞大的卖家群体推出一项贷款推荐计划。在连续对印度、墨西哥等新兴市场大力推广线上支付服务后，亚马逊金融试水进军中国市场的信号终于被放出。
-                  </p>
-                  <div class="new_info">
-                      <span>标签：财经&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( 5
-                          )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论( 10 )</span>
-                      <b>发布于 2018-08-30 12:18:58</b>
-                  </div>
-              </div>
-              <div class="common_news_list">
-                  <a href="#" class="list_pic"><img src="../../assets/img/pic09.jpg" alt=""></a>
-                  <h4><a href="#">亚马逊金融试水中国？背后却是和华尔街的“金融战争” </a></h4>
-                  <p>亚马逊抛弃了中国的买家们，却难以割舍庞大的卖家市场，有消息指出亚马逊中国将针对中国庞大的卖家群体推出一项贷款推荐计划。在连续对印度、墨西哥等新兴市场大力推广线上支付服务后，亚马逊金融试水进军中国市场的信号终于被放出。
-                  </p>
-                  <div class="new_info">
-                      <span>标签：财经&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( 5
-                          )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论( 10 )</span>
-                      <b>发布于 2018-08-30 12:18:58</b>
-                  </div>
-            </div>
-              <el-divider></el-divider>
-              <div class="common_news_list">
-                  <a href="#" class="list_pic"><img src="../../assets/img/pic03.jpg" alt=""></a>
-                  <h4><a href="#">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱,马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</a></h4>
-                  <p>亚马逊抛弃了中国的买家们，却难以割舍庞大的卖家市场，有消息指出亚马逊中国将针对中国庞大的卖家群体推出一项贷款推荐计划。在连续对印度、墨西哥等新兴市场大力推广线上支付服务后，亚马逊金融试水进军中国市场的信号终于被放出。
-                  </p>
-                  <div class="new_info">
-                      <span>标签：财经&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( 5
-                          )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论( 10 )</span>
-                      <b>发布于 2018-08-30 12:18:58</b>
-                  </div>
-              </div>
-               <el-pagination background
-                  layout="prev, pager, next"
-                  :page-count="totalpage"
-                  :current-page.sync="currentPage"
-                  :page-size="pageSize"
-                  @current-change="currentChange"
-                  :total="totalcomm">
-                </el-pagination>
-
+          <div v-for="items in findnews" :key="items.id.toString()"  class="common_news_list" @click="godetails(items.id)">
+                <a href="#" class="list_pic"><img style="width:190px;height:130px" :src="items.picture?items.picture:morenp" alt=""></a>
+                <h4>{{items.title}}</h4>
+                <p>{{items.newsAbstract}}</p>
+                <div class="new_info">
+                    <span>&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( {{items.readNum}}
+                        )&nbsp;&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;评论热度( {{items.commentNum}} )</span>
+                    <b>发布于 2018-08-30 12:18:58</b>
+                </div>
+          </div>
         </el-card>
       </el-main>
     </el-container>
@@ -115,35 +87,115 @@
   </el-container>
 </template>
 <script>
-import { recentcomm } from '@/api/news.js'
+import { getChannels } from '@/api/channel.js'
+import { recentcomm, searchnewsbytype, searchnewsbyname } from '@/api/news.js'
 export default {
   name: 'home',
   components: {},
   data () {
     return {
-      pageSize: 5,
-      totalcomm: 0,
-      currentPage: 1,
-      totalpage: 0,
-      recent: []
+      search: '',
+      statu: '',
+      channels: [],
+      isClick: false,
+      recent: [],
+      findnews: []
     }
   },
   methods: {
-    currentChange () {
-      console.log('页码变换了')
+    haoway () {
+      if (window.localStorage.getItem('by') === 1) {
+        this.loadSearchNewsByType()
+      } else {
+        this.loadSearchNewsByName()
+      }
+    },
+    godetails (id) {
+      this.$store.commit('setarticalid', id)
+      this.$router.push('/details')
     },
     async loadRecentComm () {
       const { data } = await recentcomm()
       this.recent = data.data.items
-      // console.log(this.recent)
+    },
+    async loadSearchNewsByName () {
+      const name = this.$store.state.searchname
+      const { data } = await searchnewsbyname(name)
+      this.findnews = data.data.items
+    },
+    async loadSearchNewsByType () {
+      const type = this.$store.state.searchtype
+      const { data } = await searchnewsbytype(type)
+      this.findnews = data.data.items
+    },
+    searchname (name) {
+      this.$store.commit('setsearchname', name)
+      window.localStorage.setItem('by', 0)
+      this.loadSearchNewsByName()
+    },
+    searchtype (type) {
+      this.$store.commit('setsearchtype', type)
+      window.localStorage.setItem('by', 1)
+      this.loadSearchNewsByType()
+    },
+    getsta () {
+      var token = window.localStorage.getItem('user-token')
+      var name = window.localStorage.getItem('user-account')
+      if (token) {
+        this.statu = `欢迎你！${name}`
+        this.isClick = true
+      } else {
+        this.statu = `去登录！`
+        this.isClick = false
+      }
+    },
+    tosomewhere () {
+      if (window.localStorage.getItem('isAdmin') === 'true') {
+        this.$router.push('/account')
+      } else {
+        this.$router.push('/visitor')
+      }
+    },
+    logout () {
+      window.localStorage.removeItem('user-token')
+      window.localStorage.removeItem('user-account')
+      window.localStorage.removeItem('isAdmin')
+      window.localStorage.removeItem('accountid')
+      this.$router.push('/')
+      this.$message({
+        type: 'success',
+        message: '账户登出成功!'
+      })
+      this.getsta()
+    },
+    async loadChannels () {
+      const { data } = await getChannels()
+      this.channels = data.data.items
     }
   },
   created () {
+    this.getsta()
+    this.loadChannels()
     this.loadRecentComm()
+    setTimeout(this.haoway(), 100)
   }
 }
 </script>
 <style lang="less" scoped>
+   .leftimg {
+    img {
+      height: 70px;
+    }
+  }
+  .rightherf{
+      a {
+          text-decoration: none;
+      }
+  }
+  .el-menu-demo{
+      margin-top:20px;
+      height: 60px;
+  }
   .common_news_list {
     height: 135px;
     padding-left: 195px;

@@ -15,7 +15,7 @@
         </div>
          <div v-for="items in hotnews" :key="items.id.toString()"  class="common_news_list" @click="godetails(items.id)">
                 <a href="#" class="list_pic"><img style="width:190px;height:130px" :src="items.picture?items.picture:morenp" alt=""></a>
-                <h4><a href="#">{{items.title}} </a></h4>
+                <h4>{{items.title}}</h4>
                 <p>{{items.newsAbstract}}</p>
                 <div class="new_info">
                     <span>标签：{{items.newsTypes.type}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;阅读( {{items.readNum}}

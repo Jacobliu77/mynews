@@ -28,10 +28,16 @@ export const getnewslist = (page, size) => {
     url: `/news/list?page=${page}&pageSize=${size}`
   })
 }
-export const searchfilm = params => {
+export const searchnewsbyname = params => {
   return request({
     method: 'GET',
-    url: `/movie/search?name=${params}`
+    url: `/news/search?name=${params}`
+  })
+}
+export const searchnewsbytype = params => {
+  return request({
+    method: 'GET',
+    url: `/news/search?type=${params}`
   })
 }
 export const recentcomm = () => {
