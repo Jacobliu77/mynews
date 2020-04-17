@@ -83,10 +83,6 @@ const routes = [
         component: () => import('../views/account/news/getinfo')
       },
       {
-        path: 'admin/find', // 获取电影详情
-        component: () => import('../views/account/admin/find')
-      },
-      {
         path: 'admin/all', // 获取电影详情
         component: () => import('../views/account/admin/all')
       }

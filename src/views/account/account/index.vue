@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     async getuserinfo () {
-      const id = this.$store.state.accountid
+      const id = window.localStorage.getItem('accountid')
       const { data } = await getuserinfo(id)
       if (data.code === 200) {
         this.formData = data.data

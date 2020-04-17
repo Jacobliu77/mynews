@@ -8,7 +8,7 @@
      </el-col>
      <el-col class='right' :span="12">
          <el-row type='flex' justify="end" align="middle">
-             <img :src="userInfo.photo ? userInfo.photo : defaultImg" alt="">
+             <img :src="userInfo.headImage ? userInfo.headImage : defaultImg" alt="">
              <!-- 下拉菜单 -->
              <el-dropdown @command="clickMenu">
                  <!-- 匿名插槽  下拉菜单显示的元素内容 -->
@@ -24,6 +24,7 @@
   </el-row>
 </template>
 <script>
+import { getuserinfo } from '@/api/account.js'
 export default {
   data () {
     return {
@@ -35,8 +36,25 @@ export default {
   },
   created () {
     this.userInfo.name = window.localStorage.getItem('user-account')
+    this.getuserinfo()
   },
   methods: {
+    async getuserinfo () {
+      const id = window.localStorage.getItem('accountid')
+      const { data } = await getuserinfo(id)
+      if (data.code === 200) {
+        this.userInfo = data.data
+        this.$message({
+          type: 'success',
+          message: '获取用户信息成功！'
+        })
+      } else {
+        this.$message({
+          type: 'error',
+          message: `获取用户信息失败！${data.error}`
+        })
+      }
+    },
     forder () {
       this.$store.state.isforder = !this.$store.state.isforder
     },

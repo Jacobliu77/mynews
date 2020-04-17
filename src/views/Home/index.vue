@@ -13,7 +13,7 @@
           <span style="font-size:28px;font-weight:700"><i style="color:#545c64;font-size:32px" class="el-icon-s-promotion"></i>最热推荐</span>
           <el-button style="float: right; padding: 3px 0;font-size:30px" type="text">>></el-button>
         </div>
-         <div v-for="items in hotnews" :key="items.id.toString()"  class="common_news_list">
+         <div v-for="items in hotnews" :key="items.id.toString()"  class="common_news_list" @click="godetails(items.id)">
                 <a href="#" class="list_pic"><img style="width:190px;height:130px" :src="items.picture?items.picture:morenp" alt=""></a>
                 <h4><a href="#">{{items.title}} </a></h4>
                 <p>{{items.newsAbstract}}</p>
@@ -76,6 +76,10 @@ export default {
       const { data } = await gethotnews()
       this.hotnews = data.data.items
       // console.log(this.hotnews)
+    },
+    godetails (id) {
+      this.$store.commit('setarticalid', id)
+      this.$router.push('/details')
     },
     async loadRecentComm () {
       const { data } = await recentcomm()

@@ -23,7 +23,7 @@ export const repassword = fd => {
     data: fd
   })
 }
-export const delfilm = params => {
+export const deluser = params => {
   return request({
     method: 'DELETE',
     url: `/news/manager?id=${params}`
@@ -32,7 +32,7 @@ export const delfilm = params => {
 export const open = params => {
   return request({
     method: 'PUT',
-    url: `/movie/account/reopen?id=${params}`
+    url: `/news/account/reopen?id=${params}`
   })
 }
 export const getall = (page, size) => {

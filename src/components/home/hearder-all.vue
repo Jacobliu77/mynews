@@ -11,7 +11,7 @@
         <el-col :span="8">
           <div class="middlesearch">
             <el-input style="width:115%;margin-top:25px" placeholder="请输入内容" v-model="search" class="input-with-select">
-              <el-button  slot="append" icon="el-icon-search"></el-button>
+              <el-button  slot="append" icon="el-icon-search" @click="searchname(search)"></el-button>
             </el-input>
           </div>
         </el-col>
@@ -29,12 +29,12 @@
     active-text-color="#ffd04b">
     <el-submenu index="7" style="margin-left:10%;">
         <template slot="title"> <i class="el-icon-menu"></i>所有分类</template>
-        <el-menu-item :index="item.id.toString()" v-for="item in channels" :key="item.id" style="margin-left:0;text-align:center;">{{item.style}}</el-menu-item>
+        <el-menu-item :index="item.id.toString()" v-for="item in channels" :key="item.id" @click="searchtype(item.style)" style="margin-left:0;text-align:center;">{{item.style}}</el-menu-item>
     </el-submenu>
-    <el-menu-item index="1"  >娱乐演艺</el-menu-item>
-    <el-menu-item index="2"  >国防军事</el-menu-item>
-    <el-menu-item index="3"  >科技未来</el-menu-item>
-    <el-menu-item index="4"  >金融财经</el-menu-item>
+    <el-menu-item index="1" @click="searchtype('娱乐演艺')"  >娱乐演艺</el-menu-item>
+    <el-menu-item index="2"  @click="searchtype('国防军事')" >国防军事</el-menu-item>
+    <el-menu-item index="3"  @click="searchtype('科技未来')" >科技未来</el-menu-item>
+    <el-menu-item index="4"  @click="searchtype('金融财经')" >金融财经</el-menu-item>
     <el-menu-item index="7" :disabled="!isClick" @click="tosomewhere"  >个人中心</el-menu-item>
     <el-menu-item style="margin-left:25%" index="7" :disabled="isClick" @click="$router.push('/login')"  > <i class="el-icon-user-solid"></i><span v-text="statu">欢迎你！</span></el-menu-item>
     <el-menu-item :disabled="!isClick" style="margin-left:0"  index="8" @click="logout()"><span>安全登出</span></el-menu-item>
@@ -57,6 +57,14 @@ export default {
     this.loadChannels()
   },
   methods: {
+    searchname (name) {
+      this.$store.commit('setsearchname', name)
+      this.$router.push('/search')
+    },
+    searchtype (type) {
+      this.$store.commit('setsearchtype', type)
+      this.$router.push('/search')
+    },
     getsta () {
       var token = window.localStorage.getItem('user-token')
       var name = window.localStorage.getItem('user-account')

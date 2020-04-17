@@ -23,7 +23,7 @@
         <el-input type="text" v-model="formData.name" style="width:40%" disabled></el-input>
       </el-form-item>
       <el-form-item label="个人头像" prop="photo">
-        <el-input type="text" v-model="formData.image" placeholder="请输入百度图库图片地址" style="width:40%" disabled></el-input>
+        <el-input type="text" v-model="formData.headImage" placeholder="请输入百度图库图片地址" style="width:40%" disabled></el-input>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="formData.email" style="width:40%" disabled></el-input>
@@ -39,7 +39,7 @@
     </el-form>
     <div class="imgblock">
         <span class="demonstration">用户头像预览</span>
-        <el-image :src="formData.image ? formData.image : picurl">
+        <el-image :src="formData.headImage ? formData.headImage : picurl">
           <div slot="placeholder" class="image-slot" style="margin-top:20px">
             加载中<span class="dot">...</span>
           </div>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { getuserinfo, delfilm, open } from '@/api/account.js'
+import { getuserinfo, deluser, open } from '@/api/account.js'
 export default {
   data () {
     return {
@@ -84,7 +84,7 @@ export default {
     },
     async delacco () {
       const id = this.idinput
-      const { data } = await delfilm(id)
+      const { data } = await deluser(id)
       if (data.code === 200) {
         this.$message({
           type: 'success',
