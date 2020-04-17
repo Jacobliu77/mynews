@@ -118,7 +118,6 @@ export default {
       fd.type = [this.formData.type[0]]
       fd.readNum = parseInt(this.formData.readNum)
       fd.commentNum = parseInt(this.formData.commentNum)
-      console.log(fd)
       const { data } = await saveNewsInfo(fd)
       if (data.code === 200) {
         this.$message({

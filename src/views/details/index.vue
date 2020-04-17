@@ -31,29 +31,35 @@
           <div class="article_info"><span id="author">{{newsdetails.author}} </span> 发布于 <span id="date"> {{newsdetails.releaseTime}}</span>&nbsp;&nbsp;&nbsp;阅读:
                 ( <span id="readcount"> {{newsdetails.readNum}}</span> )&nbsp;&nbsp;&nbsp;评论: ( <span id="commentCount">{{newsdetails.commentNum}}</span> )
           </div>
+          <img :src="newsdetails.picture" alt="" style="width:70%;margin-left:13.5%;margin-top:15px">
           <div class="article_con" id="content" v-html="newsdetails.content">
           </div>
           <div class="">
               上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br>
               下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a>
           </div>
-          <form action="" class="comment_form">
+          <form :model="formData" class="comment_form" v-if="islogin">
                 <div class="form_group">
                     <label>评论内容：</label>
-                    <textarea placeholder="请发表您的评论" id="usercontent" class="comment_input"></textarea>
+                    <textarea v-model="formData.content" placeholder="请发表您的评论" id="usercontent" class="comment_input"></textarea>
                 </div>
-                <div class="form_group">
-                    <input type="button" name="" id="subbtn" value="评 论" class="comment_sub"></div>
+                <div class="form_group" style="text-align:right">
+                <el-button type="primary" round  @click="sub">发表己见</el-button>
+                </div>
           </form>
-          <div class="comment_count">
-               <span id="comment_count">4</span> 条评论
+          <div class="notlogin" style="text-align:center" v-else>
+            <h3>亲！您未登录不可以评论哦！</h3>
+            <el-button type="primary" round  @click="$router.push('/login')">这就去登录</el-button>
           </div>
-          <div class="comment_list_con" id="comment_list_down">
+          <div class="comment_count">
+               <span id="comment_count">{{relavtivecomm.length}}</span> 条评论
+          </div>
+          <div class="comment_list_con" id="comment_list_down" v-for="item in relavtivecomm" :key="item.id">
                 <div class="comment_detail_list">
-                    <div class="person_pic fl">乔</div>
-                    <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
+                    <div class="person_pic fl">{{item.author.charAt(0)}}</div>
+                    <div class="name_time fl"><b>{{item.author}}</b><span>在{{item.createTime}}说</span></div>
                     <div class="comment_text fl">
-                        遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
+                       {{item.content}}
                     </div>
                 </div>
             </div>
@@ -67,17 +73,41 @@
 </template>
 <script>
 import { recentcomm, getnews } from '@/api/news.js'
-
+import { getidComm, publicComm } from '@/api/comment.js'
 export default {
   name: 'home',
   components: {},
   data () {
     return {
+      formData: {},
+      islogin: false,
       recent: [],
-      newsdetails: {}
+      newsdetails: {},
+      relavtivecomm: []
     }
   },
   methods: {
+    sub () {
+      this.pubComm()
+    },
+    async pubComm () {
+      const fd = this.formData
+      fd.newsId = this.$store.state.articalid
+      fd.accountName = window.localStorage.getItem('user-account')
+      const { data } = await publicComm(fd)
+      if (data.code === 200) {
+        this.$message({
+          type: 'success',
+          message: '发表评论成功'
+        })
+        this.loadComm()
+      } else {
+        this.$message({
+          type: 'error',
+          message: '评论发表失败' + data.error
+        })
+      }
+    },
     async loadRecentComm () {
       const { data } = await recentcomm()
       this.recent = data.data.items
@@ -86,11 +116,26 @@ export default {
       const id = this.$store.state.articalid
       const { data } = await getnews(id)
       this.newsdetails = data.data.info
+    },
+    async loadComm () {
+      const id = this.$store.state.articalid
+      const { data } = await getidComm(id)
+      this.relavtivecomm = data.data.items
+    },
+    islogined () {
+      var flag = window.localStorage.getItem('user-token')
+      if (flag) {
+        this.islogin = true
+      } else {
+        this.islogin = false
+      }
     }
   },
   created () {
     this.loadRecentComm()
+    this.islogined()
     setTimeout(this.loadNews(), 100)
+    setTimeout(this.loadComm(), 100)
   }
 }
 </script>

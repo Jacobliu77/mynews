@@ -15,6 +15,13 @@ export const getidComm = id => {
     url: `/news/comment/${id}`
   })
 }
+export const publicComm = fd => {
+  return request({
+    method: 'POST',
+    url: `/news/comment`,
+    data: fd
+  })
+}
 export const delComm = params => {
   return request({
     method: 'DELETE',
