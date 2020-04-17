@@ -4,7 +4,7 @@
    <el-header class="el-header" style="height: 70px;width:80%;margin-left:10%;line-height: 70px">
       <el-row type="flex" justify="space-between" style="height:80px">
         <el-col :span="4" style="text-align:left">
-          <div class="leftimg">
+          <div class="leftimg" @click="$router.push('/')">
               <img src="../../assets/img/icon.png" alt="">
           </div>
         </el-col>
@@ -115,6 +115,9 @@ export default {
       a {
           text-decoration: none;
       }
+  }
+  .leftimg:hover {
+    cursor:pointer;
   }
   .el-menu-demo{
       margin-top:20px;
