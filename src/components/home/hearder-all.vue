@@ -35,7 +35,7 @@
     <el-menu-item index="2"  >国防军事</el-menu-item>
     <el-menu-item index="3"  >科技未来</el-menu-item>
     <el-menu-item index="4"  >金融财经</el-menu-item>
-    <el-menu-item index="7" @click="tosomewhere"  >个人中心</el-menu-item>
+    <el-menu-item index="7" :disabled="!isClick" @click="tosomewhere"  >个人中心</el-menu-item>
     <el-menu-item style="margin-left:25%" index="7" :disabled="isClick" @click="$router.push('/login')"  > <i class="el-icon-user-solid"></i><span v-text="statu">欢迎你！</span></el-menu-item>
     <el-menu-item :disabled="!isClick" style="margin-left:0"  index="8" @click="logout()"><span>安全登出</span></el-menu-item>
     </el-menu>

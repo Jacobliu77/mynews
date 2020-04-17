@@ -54,8 +54,6 @@
           </el-form-item>
           <el-form-item>
               <el-button @click="publishArticle()" type='primary'>发布</el-button>
-              <el-button @click="publishArticle(true)">存入草稿</el-button>
-
           </el-form-item>
       </el-form>
   </el-card>
@@ -112,21 +110,6 @@ export default {
         obj.lable = channels[i].style
         this.options.push(obj)
       }
-    },
-    async savenews () {
-      // const fd = this.formData
-      // const { data } = await savenewsinfo(fd)
-      // if (data.code === 200) {
-      //   this.$message({
-      //     type: 'success',
-      //     message: '保存电影信息成功'
-      //   })
-      // } else {
-      //   this.$message({
-      //     type: 'error',
-      //     message: '保存电影信息失败' + data.error
-      //   })
-      // }
     },
     async publishArticle () {
       const fd = this.formData

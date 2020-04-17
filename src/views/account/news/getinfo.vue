@@ -7,9 +7,6 @@
           资讯文章管理
         </template>
       </bread-crumb>
-      <el-input v-model="idinput" style="margin-bottom:20px" placeholder="请输入对应文章id"></el-input>
-      <el-button  type="primary" icon="el-icon-search" @click="getid" circle></el-button>
-      <el-divider></el-divider>
       <el-table :data="commData" style="width: 100%">
         <el-table-column prop="id" label="文章id" width="180"></el-table-column>
         <el-table-column prop="id" label="文章封面" width="180">
@@ -27,7 +24,6 @@
             width="100">
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
-              <el-button @click="handleClick(scope.row)" type="text" size="small">发布</el-button>
             </template>
           </el-table-column>
       </el-table>
@@ -44,7 +40,7 @@
 </template>
 
 <script>
-import { getnewslist } from '@/api/news.js'
+import { getnewslist, delNews } from '@/api/news.js'
 export default {
   data () {
     return {
@@ -76,10 +72,10 @@ export default {
     currentChange () {
       this.getalllist()
     },
-    // async delidcomm (id) {
-    //   await delComm(id)
-    //   this.getalllist()
-    // },
+    async delidnews (id) {
+      await delNews(id)
+      this.getalllist()
+    },
     getid () {
       this.getidcomm(this.idinput)
     },
@@ -88,12 +84,12 @@ export default {
     },
     open (id) {
       const commid = id
-      this.$confirm('此操作将永久删除该评论, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.delidcomm(commid)
+        this.delidnews(commid)
         this.$message({
           type: 'success',
           message: '删除成功!'

@@ -61,14 +61,14 @@
               class="demo-ruleForm"
               style="text-align:left;margin-left:20px"
             >
-              <el-form-item label="账号/用户名" prop="account">
+             <el-form-item label="账号/用户名" prop="account">
                 <el-input type="text" v-model="formdata.account" placeholder="请确认您的账户名" style="width:40%"></el-input>
               </el-form-item>
-              <el-form-item label="旧密码" prop="old_passwd">
-                <el-input type="password" v-model="formdata.old_passwd" placeholder="请输入旧密码" style="width:40%"></el-input>
+              <el-form-item label="旧密码" prop="oldPassword">
+                <el-input type="password" v-model="formdata.oldPassword" placeholder="请输入旧密码" style="width:40%"></el-input>
               </el-form-item>
-              <el-form-item label="新密码" prop="new_passwd">
-                <el-input type="password" v-model="formdata.new_passwd" placeholder="请输入新密码" style="width:40%"></el-input>
+              <el-form-item label="新密码" prop="newPassword">
+                <el-input type="password" v-model="formdata.newPassword" placeholder="请输入新密码" style="width:40%"></el-input>
               </el-form-item>
               <el-form-item label="确认新密码" prop="repassword">
                 <el-input type="password" v-model="formdata.repassword" placeholder="请再次确认新密码" style="width:40%"></el-input>
@@ -103,8 +103,8 @@ export default {
       defaultImg: '../../../assets/img/icon.png',
       formdata: {
         account: '',
-        old_passwd: '',
-        new_passwd: '',
+        oldPassword: '',
+        newPassword: '',
         repassword: ''
       },
       rules: {
@@ -128,10 +128,10 @@ export default {
         account: [
           { required: true, message: '用户名不能为空' }
         ],
-        old_passwd: [
+        oldPassword: [
           { required: true, message: '原有密码不能为空' }
         ],
-        new_passwd: [
+        newPassword: [
           { required: true, message: '请输入您的密码' },
           {
             pattern: /^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/,
@@ -190,7 +190,7 @@ export default {
     async repass () {
       const success =
         (await this.$refs.myForm.validate()) &&
-        this.formdata.new_passwd === this.formdata.repassword
+        this.formdata.newPassword === this.formdata.repassword
       if (success) {
         const fd = this.formdata
         // fd.account = this.formdata.account
@@ -202,6 +202,10 @@ export default {
             type: 'success',
             message: '账户修改密码成功!'
           })
+          window.localStorage.removeItem('user-token')
+          window.localStorage.removeItem('user-account')
+          window.localStorage.removeItem('isAdmin')
+          window.localStorage.removeItem('accountid')
           this.$router.push('/')
         } else {
           this.$message({

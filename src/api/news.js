@@ -16,10 +16,10 @@ export const saveNewsInfo = fd => {
     data: fd
   })
 }
-export const delfilm = params => {
+export const delNews = params => {
   return request({
     method: 'DELETE',
-    url: `/movie/${params}`
+    url: `/news/${params}`
   })
 }
 export const getnewslist = (page, size) => {
