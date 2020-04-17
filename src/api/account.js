@@ -32,7 +32,7 @@ export const deluser = params => {
 export const open = params => {
   return request({
     method: 'PUT',
-    url: `/news/account/reopen?id=${params}`
+    url: `/news/manager/reopen?id=${params}`
   })
 }
 export const getall = (page, size) => {

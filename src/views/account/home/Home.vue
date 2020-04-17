@@ -5,7 +5,18 @@
         <!-- <h3 class="medium">{{ item }}</h3> -->
       </el-carousel-item>
     </el-carousel>
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1404503996&auto=0&height=66"></iframe>
+    <el-row>
+      <el-col :span="12">
+        <el-card class="box-card" style="width:100%;margin-top:20px;padding:0">
+          <line-chart></line-chart>
+        </el-card>
+      </el-col>
+      <el-col :span="12">
+        <el-card class="box-card" style="width:100%;margin-top:20px;padding:0">
+          <pie-chart></pie-chart>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 

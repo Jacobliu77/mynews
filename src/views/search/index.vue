@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     haoway () {
-      if (window.localStorage.getItem('by') === 1) {
+      if (window.localStorage.getItem('by') === '1') {
         this.loadSearchNewsByType()
       } else {
         this.loadSearchNewsByName()
@@ -130,12 +130,10 @@ export default {
     },
     searchname (name) {
       this.$store.commit('setsearchname', name)
-      window.localStorage.setItem('by', 0)
       this.loadSearchNewsByName()
     },
     searchtype (type) {
       this.$store.commit('setsearchtype', type)
-      window.localStorage.setItem('by', 1)
       this.loadSearchNewsByType()
     },
     getsta () {

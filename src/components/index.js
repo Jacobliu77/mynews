@@ -3,6 +3,8 @@ import layoutHeader from './home/layout-header'
 import HeaderAll from './home/hearder-all'
 import Footer from './home/footer'
 import Echarts from './home/hotwords'
+import EchartsLine from './publish/linechart'
+import EchartsPie from './publish/piechart'
 import weibo from './home/weibo'
 import breadCrumb from './common/bread-crumb'
 import breadCrumbFront from './common/bread-crumb-front'
@@ -24,6 +26,8 @@ export default {
     Vue.component('header-all', HeaderAll) // 注册头
     Vue.component('footer-all', Footer) // 注册尾
     Vue.component('hot-words', Echarts) // 注册热词星球
+    Vue.component('line-chart', EchartsLine) // 注册用户折线图
+    Vue.component('pie-chart', EchartsPie) // 用户行为饼状图
     Vue.component('weibo', weibo) // 注册微博热搜榜
   }
 }

@@ -43,7 +43,7 @@ export const searchnewsbyname = params => {
 export const searchnewsbytype = params => {
   return request({
     method: 'GET',
-    url: `/news/search?type=${params}`
+    url: `/news/list?type=${params}&page=0&pageSize=30`
   })
 }
 export const recentcomm = () => {
