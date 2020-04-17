@@ -9,6 +9,12 @@ export const gethotnews = () => {
     url: `/news/hot`
   })
 }
+export const getnews = params => {
+  return request({
+    method: 'GET',
+    url: `/news/${params}`
+  })
+}
 export const saveNewsInfo = fd => {
   return request({
     method: 'POST',

@@ -27,23 +27,11 @@
          <bread-crumb-front slot="header">
             <template slot="title"> <a href="">上一级页面</a>  <span style="font-weight:700;color:#ccc">></span> 文章详情</template>
           </bread-crumb-front>
-          <h3 class="article_title" id="title">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</h3>
-          <div class="article_info"><span id="author"> </span> 发布于 <span id="date"> 2019-05-08
-                    07:08:46</span>&nbsp;&nbsp;&nbsp;分类: <span id="typename">奇趣事</span> &nbsp;&nbsp;&nbsp;阅读:
-                ( <span id="readcount"></span> )&nbsp;&nbsp;&nbsp;评论: ( <span id="commentCount"></span> )
+          <h3 class="article_title" id="title">{{newsdetails.title}}</h3>
+          <div class="article_info"><span id="author">{{newsdetails.author}} </span> 发布于 <span id="date"> {{newsdetails.releaseTime}}</span>&nbsp;&nbsp;&nbsp;阅读:
+                ( <span id="readcount"> {{newsdetails.readNum}}</span> )&nbsp;&nbsp;&nbsp;评论: ( <span id="commentCount">{{newsdetails.commentNum}}</span> )
           </div>
-          <div class="article_con" id="content">
-
-                <p>“上天入地”还不够？硅谷“钢铁侠”马斯克名下一家低调的公司最近又融了一大笔钱。</p>
-
-                <p>马斯克投资的一家小型且不为人熟知的脑机接口（brain-computer
-                    interface）公司Neuralink披露，该公司融到了3900万美元，虽然不及公司计划的融资额5100万美元，但也比上次的融资多了不少。</p>
-
-                <p>两年前该公司曾计划融资1亿美元，但只拿到了2700万美元的融资。</p>
-
-                <p>在Neuralink递交给美国证券交易委员会（SEC）的材料中，并没有披露融资是否来自传统的风险投资者或者来自该公司的员工。</p>
-
-                <p>2016年，Neuralink在美国加利福尼亚州以医学研究公司的名义成立，之后一直低调运行。</p>
+          <div class="article_con" id="content" v-html="newsdetails.content">
           </div>
           <div class="">
               上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br>
@@ -78,29 +66,31 @@
   </el-container>
 </template>
 <script>
-import { recentcomm } from '@/api/news.js'
+import { recentcomm, getnews } from '@/api/news.js'
 
 export default {
   name: 'home',
   components: {},
   data () {
     return {
-      pageSize: 5,
-      totalcomm: 0,
-      currentPage: 1,
-      totalpage: 0,
-      recent: []
+      recent: [],
+      newsdetails: {}
     }
   },
   methods: {
     async loadRecentComm () {
       const { data } = await recentcomm()
       this.recent = data.data.items
-      // console.log(this.recent)
+    },
+    async loadNews () {
+      const id = this.$store.state.articalid
+      const { data } = await getnews(id)
+      this.newsdetails = data.data.info
     }
   },
   created () {
     this.loadRecentComm()
+    setTimeout(this.loadNews(), 100)
   }
 }
 </script>
