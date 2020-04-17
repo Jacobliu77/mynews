@@ -9,10 +9,10 @@ export const gethotnews = () => {
     url: `/news/hot`
   })
 }
-export const savefilminfo = fd => {
+export const saveNewsInfo = fd => {
   return request({
     method: 'POST',
-    url: `/movie`,
+    url: `/news`,
     data: fd
   })
 }
