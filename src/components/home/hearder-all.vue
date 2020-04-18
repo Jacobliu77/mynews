@@ -1,6 +1,5 @@
 <template>
     <div>
-
    <el-header class="el-header" style="height: 70px;width:80%;margin-left:10%;line-height: 70px">
       <el-row type="flex" justify="space-between" style="height:80px">
         <el-col :span="4" style="text-align:left">

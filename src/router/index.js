@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from '@/views/Home/'
 import login from '@/views/login/'
+import about from '@/views/about/'
 import register from '@/views/register/'
 import account from '@/views/account/home/'
 import acchome from '@/views/account/home/Home.vue'
@@ -28,6 +29,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: login
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: about
   },
   {
     path: '/visitor',

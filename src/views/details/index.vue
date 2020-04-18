@@ -35,7 +35,7 @@
           <div class="article_con" id="content" v-html="newsdetails.content">
           </div>
            <el-divider></el-divider>
-          <div class="relbox">
+          <div class="relbox" v-if="isreal">
             <h3>为您推荐：</h3>
             <p v-for="item in relavt" :key="item.id" @click="go(item.id)" style="text-decoration:underline;color:skyblue">{{item.title}}</p>
           </div>
@@ -80,6 +80,7 @@ export default {
   components: {},
   data () {
     return {
+      isreal: false,
       formData: {},
       islogin: false,
       recent: [],
@@ -123,6 +124,9 @@ export default {
       const { data } = await getnews(id)
       this.newsdetails = data.data.info
       this.relavt = data.data.RecentReCommentNewsInfo
+      if (data.data.RecentReCommentNewsInfo) {
+        this.isreal = true
+      }
     },
     async loadComm () {
       const id = this.$store.state.articalid
