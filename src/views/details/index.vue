@@ -34,9 +34,10 @@
           <img :src="newsdetails.picture" alt="" style="width:70%;margin-left:13.5%;margin-top:15px">
           <div class="article_con" id="content" v-html="newsdetails.content">
           </div>
-          <div class="">
-              上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br>
-              下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a>
+           <el-divider></el-divider>
+          <div class="relbox">
+            <h3>为您推荐：</h3>
+            <p v-for="item in relavt" :key="item.id" @click="go(item.id)" style="text-decoration:underline;color:skyblue">{{item.title}}</p>
           </div>
           <form :model="formData" class="comment_form" v-if="islogin">
                 <div class="form_group">
@@ -83,7 +84,8 @@ export default {
       islogin: false,
       recent: [],
       newsdetails: {},
-      relavtivecomm: []
+      relavtivecomm: [],
+      relavt: []
     }
   },
   methods: {
@@ -112,10 +114,15 @@ export default {
       const { data } = await recentcomm()
       this.recent = data.data.items
     },
+    async go (id) {
+      const { data } = await getnews(id)
+      this.newsdetails = data.data.info
+    },
     async loadNews () {
       const id = this.$store.state.articalid
       const { data } = await getnews(id)
       this.newsdetails = data.data.info
+      this.relavt = data.data.RecentReCommentNewsInfo
     },
     async loadComm () {
       const id = this.$store.state.articalid
